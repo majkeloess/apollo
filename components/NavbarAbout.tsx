@@ -2,10 +2,17 @@ import Image from "next/image";
 import { ModeToggle } from "./ui/darktoggle";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { MotionDiv } from "./ui/MotionDiv";
+import animations from "@/lib/animations";
 
 export default function AboutNavbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-slay border-b border-gray-200 bg-dark-slay dark:border-gray-800">
+    <MotionDiv
+      className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-slay border-b border-gray-200 bg-dark-slay dark:border-gray-800"
+      variants={animations.navVariants}
+      initial="hidden"
+      whileInView="show"
+    >
       <ul className="flex flex-row xl:justify-between justify-center items-center gap-10 my-5 xl:mx-32">
         <div className="xl:flex gap-10 items-center text-xl">
           <li className="dark:block hidden">
@@ -28,6 +35,6 @@ export default function AboutNavbar() {
           <ModeToggle />
         </li>
       </ul>
-    </nav>
+    </MotionDiv>
   );
 }

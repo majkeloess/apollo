@@ -11,7 +11,7 @@ export default function GooglePlayButton() {
         <div className="flex flex-row justify-center items-center m-1 gap-1">
           <IconBrandGooglePlay size={36} />
           <div>
-            <p className="text-xs self-start">GET IT ON</p>
+            <p className="xl:text-xs text-[0.6rem]">GET IT ON</p>
             <p className="xl:text-xl">Google Play</p>
           </div>
         </div>

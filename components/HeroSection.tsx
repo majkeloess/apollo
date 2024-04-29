@@ -25,7 +25,7 @@ export default function HeroSection() {
               delay: 1.5,
             }}
           >
-            <p className="w-screen xl:w-full text-xl text-center p-8">
+            <p className="w-screen xl:w-full xl:text-xl text-center px-8 xl:p-8">
               Join the community of winners and discover a{" "}
               <span className="font-bold dark:text-gray-400 text-gray-600">
                 smarter
@@ -54,8 +54,8 @@ export default function HeroSection() {
           }}
           className="w-screen flex flex-col items-center gap-4 xl:mt-12"
         >
-          <p className="text-xl">
-            Enroll for{" "}
+          <p className="xl:text-xl">
+            Download for{" "}
             <span className="font-bold dark:text-gray-400 text-gray-600">
               free
             </span>{" "}

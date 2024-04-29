@@ -50,9 +50,37 @@ export default function HeroSection() {
           transition={{
             duration: 0.5,
             ease: [0.4, 0.0, 0.2, 1],
+            delay: 2.2,
+          }}
+          className="w-screen flex flex-col items-center gap-4 xl:mt-12 xl:hidden"
+        >
+          <p className="xl:text-xl">
+            Download for{" "}
+            <span className="font-bold dark:text-gray-400 text-gray-600">
+              free
+            </span>{" "}
+            with:
+          </p>
+          <div className="flex flex-row gap-6">
+            <AppleButton />
+            <GooglePlayButton />
+          </div>
+        </MotionDiv>
+        <MotionDiv
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: [20, -5, 0],
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.4, 0.0, 0.2, 1],
             delay: 3.2,
           }}
-          className="w-screen flex flex-col items-center gap-4 xl:mt-12"
+          className="w-screen xl:flex flex-col items-center gap-4 xl:mt-12 hidden"
         >
           <p className="xl:text-xl">
             Download for{" "}

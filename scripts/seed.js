@@ -1,38 +1,16 @@
 const { db } = require('@vercel/postgres');
-const { exercises } = require("../lib/exercises.js");
+const { exercises } = require("../lib/data.js");
 
-
-// interface Exercises {
-//   name: string;
-//   muscleGroup:
-//   | "Abdominals"
-//   | "Biceps"
-//   | "Shoulders"
-//   | "Middle Back"
-//   | "Quadriceps"
-//   | "Lower Back"
-//   | "Hamstrings"
-//   | "Adductors"
-//   | "Triceps"
-//   | "Chest"
-//   | "Glutes"
-//   | "Traps"
-//   | "Calves"
-//   | "Abductors"
-//   | "Lats"
-//   | "Forearms"
-//   | "Neck";
-// }
 
 async function seedExercises(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
-    CREATE TABLE exercises(
+    CREATE TABLE IF NOT EXISTS exercises(
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      name VARCHAR(120) NOT NULL, 
-      group VARCHAR(120) NOT NULL 
+      name VARCHAR(255) NOT NULL, 
+      muscleGroup VARCHAR(255) NOT NULL 
       );
     `;
 
@@ -41,7 +19,7 @@ async function seedExercises(client) {
     const insertExercises = await Promise.all(
       exercises.map(
         (exercise) => client.sql`
-        INSERT INTO exercises (name, group)
+        INSERT INTO exercises (name, muscleGroup)
         VALUES(${exercise.name}, ${exercise.group})
         `
       ),

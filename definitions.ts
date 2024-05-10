@@ -20,13 +20,15 @@ export interface Exercises {
     | "Neck";
 }
 
-export interface Playlists {
+export interface Music {
+  id: string;
   name: string;
   link: string;
   genre: string;
 }
 
 export interface Articles {
+  id: string;
   name: string;
   link: string;
   note: string;

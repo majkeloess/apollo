@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { MotionDiv } from "./ui/MotionDiv";
 import animations from "@/lib/animations";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function AboutNavbar() {
+export default function NavbarDashboard() {
   return (
     <MotionDiv
       className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-slay border-b border-gray-200 bg-dark-slay dark:border-gray-800"
@@ -13,10 +14,10 @@ export default function AboutNavbar() {
       initial="hidden"
       whileInView="show"
     >
-      <ul className="flex flex-row xl:justify-between justify-center items-center gap-10 my-5 xl:mx-32">
+      <ul className="flex flex-row  justify-center items-center gap-10 my-5 xl:mx-32">
         <div className="xl:flex gap-10 items-center text-xl">
           <li className="dark:block hidden">
-            <Link href="/">
+            <Link href="/dashboard">
               <Image src="/watermark.png" alt="Apollo" width={80} height={40} />
             </Link>
           </li>
@@ -31,11 +32,19 @@ export default function AboutNavbar() {
             </Link>
           </li>
         </div>
-        <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">
-          <Link href="/login">
-            <Button variant="secondary">Log in</Button>
+        <li className="xl:w-1/3">
+          <Link href="/profile">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           </Link>
-          <ModeToggle />
+        </li>
+        <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">
+          <Link href="/">
+            <Button variant="secondary">Log out</Button>
+          </Link>
+          {/* <ModeToggle /> */}
         </li>
       </ul>
     </MotionDiv>

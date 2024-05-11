@@ -15,7 +15,7 @@ export default function MenuDashboard() {
     >
       <ul className="flex flex-row justify-evenly m-5">
         <li>
-          <Link href="dashboard/create">
+          <Link href="/dashboard/strength">
             <Button variant="secondary">
               <IconBarbell />
             </Button>

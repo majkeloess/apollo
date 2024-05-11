@@ -3,11 +3,18 @@ import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import ArticlesCard from "@/components/ArticleCard";
 import { fetchArticles } from "@/lib/fetch";
+import { MotionDiv } from "@/components/ui/MotionDiv";
 export default async function WisdomPage() {
   const musicData = await fetchArticles();
 
   return (
-    <div className="w-full flex justify-center">
+    <MotionDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ type: "spring", duration: 1 }}
+      exit={{ opacity: 0 }}
+      className="w-full flex justify-center"
+    >
       <div className="mt-24">
         <div className="flex flex-row justify-center gap-16 items-center font-bold my-4">
           <div className="text-5xl text-center">
@@ -32,6 +39,6 @@ export default async function WisdomPage() {
           ))}
         </div>
       </div>
-    </div>
+    </MotionDiv>
   );
 }

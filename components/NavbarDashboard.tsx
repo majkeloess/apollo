@@ -14,7 +14,7 @@ export default function NavbarDashboard() {
       initial="hidden"
       whileInView="show"
     >
-      <ul className="flex flex-row  justify-center items-center gap-10 my-5 xl:mx-32">
+      <ul className="flex flex-row  justify-center items-center gap-10 my-5">
         <div className="xl:flex gap-10 items-center text-xl">
           <li className="dark:block hidden">
             <Link href="/dashboard">
@@ -32,11 +32,14 @@ export default function NavbarDashboard() {
             </Link>
           </li>
         </div>
-        <li className="xl:w-1/3">
-          <Link href="/profile">
+        <li>
+          <Link href="/dashboard/profile">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage
+                src="https://github.com/majkeloess.png"
+                alt="@shadcn"
+              />
+              <AvatarFallback>MS</AvatarFallback>
             </Avatar>
           </Link>
         </li>
@@ -44,7 +47,7 @@ export default function NavbarDashboard() {
           <Link href="/">
             <Button variant="secondary">Log out</Button>
           </Link>
-          {/* <ModeToggle /> */}
+          <ModeToggle />
         </li>
       </ul>
     </MotionDiv>

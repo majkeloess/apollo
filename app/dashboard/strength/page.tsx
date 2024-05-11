@@ -2,6 +2,10 @@ import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import { MotionDiv } from "@/components/ui/MotionDiv";
+import ProgressCard from "@/components/ProgressCard";
+import CalendarCard from "@/components/CalendarCard";
+import { CalendarStrength } from "@/components/Calendar";
+import LatestWorkouts from "@/components/LatestWorkouts";
 
 export default async function StrengthPage() {
   return (
@@ -26,7 +30,9 @@ export default async function StrengthPage() {
           </Link>
         </div>
         <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
-          {/* data */}
+          <ProgressCard />
+          <CalendarCard />
+          <LatestWorkouts />
         </div>
       </div>
     </MotionDiv>

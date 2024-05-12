@@ -17,16 +17,6 @@ export default async function Feed() {
         <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
           <FeedCard
             username="Michał Saturczak"
-            date="May 11, 2024 at 7:25PM"
-            description="Forma jest mutancik"
-            load={5900}
-            sets={22}
-            reps={209}
-            time="1h41m"
-            photo="/sigiemka.png"
-          />
-          <FeedCard
-            username="Michał Saturczak"
             date="May 9, 2024 at 8:33PM"
             description="Good"
             load={5800}

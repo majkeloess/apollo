@@ -49,6 +49,11 @@ export default function FeedCard({
         </CardHeader>
         <CardContent>
           <p className="text-lg font-medium">{description}</p>
+          <p>
+            <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+              Chest, Shoulders, Triceps, Abs
+            </span>
+          </p>
           <div className="h-0.5 my-4 dark:bg-gray-800 bg-gray-200"></div>
           <div className="flex flex-row w-full lg:justify-evenly justify-between">
             <ul>

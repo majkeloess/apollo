@@ -22,7 +22,7 @@ export default function NavbarDashboard() {
             </Link>
           </li>
           <li className="dark:hidden">
-            <Link href="/">
+            <Link href="/dashboard">
               <Image
                 src="/watermark_w.png"
                 alt="Apollo"

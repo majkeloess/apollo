@@ -32,9 +32,11 @@ export default function AboutNavbar() {
           </li>
         </div>
         <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">
-          <Link href="/login">
-            <Button variant="secondary">Log in</Button>
-          </Link>
+          {/* <Link href="/login"> */}
+          <Button variant="secondary" disabled>
+            Log in
+          </Button>
+          {/* </Link> */}
           <ModeToggle />
         </li>
       </ul>

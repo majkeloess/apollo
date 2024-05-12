@@ -4,7 +4,6 @@ import Link from "next/link";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import ProgressCard from "@/components/ProgressCard";
 import CalendarCard from "@/components/CalendarCard";
-import { CalendarStrength } from "@/components/Calendar";
 import LatestWorkouts from "@/components/LatestWorkouts";
 
 export default async function StrengthPage() {

@@ -1,12 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function AddedWorkouts() {
+export function AddedWorkouts({ name }: { name: string | null | undefined }) {
+  const nameSplit = name?.split(" ");
+
   return (
     <div className="w-[350px] lg:w-[600px]">
       <Card>
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">
-            <CardTitle>User's Workouts</CardTitle>
+            <CardTitle>
+              {nameSplit && nameSplit[0] ? `${nameSplit[0]}'s Workouts` : ""}
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="my-2 ">
@@ -19,13 +23,17 @@ export function AddedWorkouts() {
   );
 }
 
-export function AddedArticles() {
+export function AddedArticles({ name }: { name: string | null | undefined }) {
+  const nameSplit = name?.split(" ");
+
   return (
     <div className="w-[350px] lg:w-[600px]">
       <Card>
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">
-            <CardTitle>User's Articles</CardTitle>
+            <CardTitle>
+              {nameSplit && nameSplit[0] ? `${nameSplit[0]}'s Articles` : ""}
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="my-2 ">
@@ -38,13 +46,17 @@ export function AddedArticles() {
   );
 }
 
-export function AddedMusic() {
+export function AddedMusic({ name }: { name: string | null | undefined }) {
+  const nameSplit = name?.split(" ");
+
   return (
     <div className="w-[350px] lg:w-[600px]">
       <Card>
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">
-            <CardTitle>User's Music</CardTitle>
+            <CardTitle>
+              {nameSplit && nameSplit[0] ? `${nameSplit[0]}'s Music` : ""}
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="my-2 ">

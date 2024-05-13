@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { ModeToggle } from "./ui/darktoggle";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import { MotionDiv } from "./ui/MotionDiv";
 import animations from "@/lib/animations";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { SignOut } from "./SignOut";
+import { auth } from "@/auth";
 
-export default function NavbarDashboard() {
+export default async function NavbarDashboard() {
+  const session = await auth();
   return (
     <MotionDiv
       className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-slay border-b border-gray-200 bg-dark-slay dark:border-gray-800"
@@ -35,13 +36,11 @@ export default function NavbarDashboard() {
         </div>
         <li>
           <Link href="/dashboard/profile">
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/majkeloess.png"
-                alt="@shadcn"
-              />
-              <AvatarFallback>MS</AvatarFallback>
-            </Avatar>
+            {session?.user?.image && (
+              <Avatar>
+                <AvatarImage src={session.user.image} alt="profileimage" />
+              </Avatar>
+            )}
           </Link>
         </li>
         <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">

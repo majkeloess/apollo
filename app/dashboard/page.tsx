@@ -1,6 +1,5 @@
 import Feed from "@/components/Feed";
-
-export default async function Page() {
+export default function Page() {
   return (
     <div>
       <Feed />

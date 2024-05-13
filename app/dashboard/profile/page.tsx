@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import LatestWorkouts from "@/components/LatestWorkouts";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { MotionDiv } from "@/components/ui/MotionDiv";
@@ -8,6 +9,7 @@ import {
 } from "@/components/UserAddedData";
 
 export default async function ProfilePage() {
+  const session = await auth();
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -18,17 +20,15 @@ export default async function ProfilePage() {
     >
       <div className="mt-28">
         <div className="flex flex-row w-full gap-6 items-center justify-center">
-          <Avatar className="w-[100px] h-[100px]">
-            <AvatarImage
-              src="https://github.com/majkeloess.png"
-              alt="@shadcn"
-            />
-            <AvatarFallback>MS</AvatarFallback>
-          </Avatar>
+          {session?.user?.image && (
+            <Avatar className="w-[100px] h-[100px]">
+              <AvatarImage src={session?.user?.image} alt="profile image" />
+            </Avatar>
+          )}
           <div>
             <h1 className="text-3xl font-medium">
               <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-                Michał Saturczak
+                {session?.user?.name}
               </span>
             </h1>
             <p>Hip-hop nigdy stop</p>
@@ -56,9 +56,9 @@ export default async function ProfilePage() {
         </div>
         <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div>
         <div className="mt-10 flex flex-col gap-10 justify-center mb-28">
-          <AddedWorkouts />
-          <AddedArticles />
-          <AddedMusic />
+          <AddedWorkouts name={session?.user?.name} />
+          <AddedArticles name={session?.user?.name} />
+          <AddedMusic name={session?.user?.name} />
         </div>
       </div>
     </MotionDiv>

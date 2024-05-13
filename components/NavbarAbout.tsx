@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { MotionDiv } from "./ui/MotionDiv";
 import animations from "@/lib/animations";
+import { SignIn } from "./SignIn";
 
 export default function AboutNavbar() {
   return (
@@ -33,10 +34,11 @@ export default function AboutNavbar() {
         </div>
         <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">
           {/* <Link href="/login"> */}
-          <Button variant="secondary" disabled>
+          {/* <Button variant="secondary" disabled>
             Log in
-          </Button>
+          </Button> */}
           {/* </Link> */}
+          <SignIn />
           <ModeToggle />
         </li>
       </ul>

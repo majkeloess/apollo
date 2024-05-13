@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { MotionDiv } from "./ui/MotionDiv";
 import animations from "@/lib/animations";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SignOut } from "./SignOut";
 
 export default function NavbarDashboard() {
   return (
@@ -44,9 +45,7 @@ export default function NavbarDashboard() {
           </Link>
         </li>
         <li className="xl:w-1/3 flex xl:justify-end items-center gap-4">
-          <Link href="/">
-            <Button variant="secondary">Log out</Button>
-          </Link>
+          <SignOut />
           <ModeToggle />
         </li>
       </ul>

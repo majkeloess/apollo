@@ -82,5 +82,11 @@ model Authenticator {
 }
 
 // model Music {
+//   musicId            String          @id @default(cuid())
+
+// }
+
+// model Article {
+//   articleId            String          @id @default(cuid())
 
 // }

@@ -81,12 +81,16 @@ model Authenticator {
   @@id([userId, credentialID])
 }
 
-// model Music {
-//   musicId            String          @id @default(cuid())
+model Music {
+  musicId            String          @id @default(cuid())
+  name String
+  link String
+  genre String
+  createdBy String
 
-// }
+}
 
-// model Article {
-//   articleId            String          @id @default(cuid())
+model Article {
+  articleId            String          @id @default(cuid())
 
-// }
+}

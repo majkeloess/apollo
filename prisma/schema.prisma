@@ -80,3 +80,7 @@ model Authenticator {
  
   @@id([userId, credentialID])
 }
+
+// model Music {
+
+// }

@@ -4,14 +4,15 @@ import { IconPlus } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import React from "react";
 import { Exercise } from "./SelectExercise";
-export function ExerciseBox() {
+import { Exercises } from "@prisma/client";
+export function ExerciseBox({ exercises }: { exercises: Exercises[] }) {
   const [exercise, setExercise] = React.useState(0);
   const exerciseElements = Array.from({ length: exercise }, (_, index) => (
     <div key={index}>
       <Label key={index} htmlFor={`exersise${index + 1}`}>
         Exercise #{index + 1}
       </Label>
-      <Exercise />
+      <Exercise exercises={exercises} />
     </div>
   ));
   return (

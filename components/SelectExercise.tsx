@@ -9,8 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Exercises } from "@prisma/client";
 
-export function Exercise() {
+export function Exercise({ exercises }: { exercises: Exercises[] }) {
   return (
     <div>
       <Select>
@@ -20,11 +21,11 @@ export function Exercise() {
         <SelectContent>
           <SelectGroup>
             <SelectLabel></SelectLabel>
-            <SelectItem value="apple">Bench press</SelectItem>
-            <SelectItem value="banana">Squat</SelectItem>
-            <SelectItem value="blueberry">Shoulder press</SelectItem>
-            <SelectItem value="grapes">Deadlift</SelectItem>
-            <SelectItem value="pineapple">Lateral raise</SelectItem>
+            {exercises.map((exercise) => (
+              <SelectItem value={exercise.exerciseId}>
+                {exercise.exerciseName}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

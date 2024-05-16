@@ -31,10 +31,10 @@ export default async function MusicPage() {
         <div className="grid grid-cols-2 gap-6 items-center mx-6 mt-10 mb-32">
           {musicData.map((playlist) => (
             <MusicCard
-              key={playlist.name}
-              name={playlist.name}
+              key={playlist.musicId}
+              name={playlist.musicName}
               genre={playlist.genre}
-              link={playlist.link}
+              link={playlist.musicLink}
             />
           ))}
         </div>

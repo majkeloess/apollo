@@ -31,10 +31,10 @@ export default async function WisdomPage() {
         <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
           {musicData.map((article) => (
             <ArticlesCard
-              key={article.name}
-              name={article.name}
+              key={article.articleId}
+              name={article.articlesName}
               note={article.note}
-              link={article.link}
+              link={article.articlesLink}
             />
           ))}
         </div>

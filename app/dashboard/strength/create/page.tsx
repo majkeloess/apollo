@@ -14,7 +14,10 @@ import Link from "next/link";
 
 import { IconArrowBack } from "@tabler/icons-react";
 import { ExerciseBox } from "@/components/ExerciseForm";
-export default function CreateStrength() {
+import { fetchExercises } from "@/lib/fetch";
+
+export default async function CreateStrength() {
+  const exercises = await fetchExercises();
   return (
     <MotionDiv
       className="w-full h-screen flex justify-center"
@@ -39,7 +42,7 @@ export default function CreateStrength() {
                 <div className="h-0.5 my-4 dark:bg-gray-800 bg-gray-200"></div>
 
                 <div className="flex flex-col space-y-1.5">
-                  <ExerciseBox />
+                  <ExerciseBox exercises={exercises} />
                 </div>
               </div>
             </form>

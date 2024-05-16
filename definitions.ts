@@ -1,6 +1,7 @@
 export interface Exercises {
-  name: string;
-  group:
+  exerciseId: string;
+  exerciseName: string;
+  muscleGroup:
     | "Abdominals"
     | "Biceps"
     | "Shoulders"
@@ -18,6 +19,10 @@ export interface Exercises {
     | "Lats"
     | "Forearms"
     | "Neck";
+}
+
+export interface ExerciseBoxProps {
+  exercises: Exercises[];
 }
 
 export interface Music {

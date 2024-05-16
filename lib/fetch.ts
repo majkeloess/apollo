@@ -1,21 +1,25 @@
-import { sql } from "@vercel/postgres";
-import { Music, Articles, Exercises } from "@/definitions";
 import { unstable_noStore } from "next/cache";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+export async function fetchExercises() {
+  unstable_noStore();
+  const exerciseData = await prisma.exercises.findMany();
+
+  return exerciseData;
+}
 
 export async function fetchMusic() {
   unstable_noStore();
-  const musicData = await sql<Music>`SELECT * FROM playlists`;
+  const musicData = await prisma.music.findMany();
 
-  return musicData.rows;
-  // try {
-  // } catch (error) {
-  //   console.log("Failed to fetch Music: ", error);
-  // }
+  return musicData;
 }
 
 export async function fetchArticles() {
   unstable_noStore();
-  const articlesData = await sql<Articles>`SELECT * FROM articles`;
+  const articlesData = await prisma.articles.findMany();
 
-  return articlesData.rows;
+  return articlesData;
 }

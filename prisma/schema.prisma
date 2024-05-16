@@ -21,6 +21,7 @@ model User {
   sessions      Session[]
   music Music[]
   articles Articles[]
+  workouts Workout[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
@@ -86,27 +87,49 @@ model Authenticator {
 
 model Music {
   musicId            String          @id @default(cuid())
-  name String
-  link String
+  musicName String
+  musicLink String
   genre String
   createdAt DateTime @default(now())
-  createdBy String
-  creator User @relation(fields: [createdBy], references: [id])
+  createdBy String?
+  creator User? @relation(fields: [createdBy], references: [id])
 
 }
 
 model Articles {
   articleId            String          @id @default(cuid())
-  name String
-  link String
+  articlesName String
+  articlesLink String
   note String
   createdAt DateTime @default(now())
-  createdBy String
-  creator User @relation(fields: [createdBy], references: [id] )
+  createdBy String?
+  creator User? @relation(fields: [createdBy], references: [id] )
 }
 
 model Exercises {
   exerciseId String  @id @default(cuid())
   exerciseName String
   muscleGroup String
+  workoutDetails WorkoutDetails[]
+}
+
+model Workout {
+  workoutId String @id @default(cuid())
+  workoutNote String
+  createdAt DateTime @default(now())
+  createdBy String
+  creator User @relation(fields: [createdBy], references: [id])
+  workoutDetails WorkoutDetails[]
+}
+
+model WorkoutDetails {
+  workoutDetailsId String @id @default(cuid())
+  workoutId String
+  workout Workout @relation(fields: [workoutId], references: [workoutId])
+  exerciseId String
+  exercise Exercises @relation(fields: [exerciseId], references: [exerciseId])
+  sets              Int
+  repetitions       Int[]
+  weights           Int[]
+
 }

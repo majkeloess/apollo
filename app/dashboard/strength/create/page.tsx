@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import Link from "next/link";
-
 import { IconArrowBack } from "@tabler/icons-react";
 import { ExerciseBox } from "@/components/ExerciseForm";
 import { fetchExercises } from "@/lib/fetch";
@@ -45,16 +44,16 @@ export default async function CreateStrength() {
                   <ExerciseBox exercises={exercises} />
                 </div>
               </div>
+              <div className="flex justify-between mt-6">
+                <Link href="/dashboard/strength">
+                  <Button variant="outline">
+                    <IconArrowBack />
+                  </Button>
+                </Link>
+                <Button>Add </Button>
+              </div>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-between">
-            <Link href="/dashboard/strength">
-              <Button variant="outline">
-                <IconArrowBack />
-              </Button>
-            </Link>
-            <Button>Add </Button>
-          </CardFooter>
         </Card>
       </div>
     </MotionDiv>

@@ -11,10 +11,16 @@ import {
 } from "@/components/ui/select";
 import { Exercises } from "@prisma/client";
 
-export function Exercise({ exercises }: { exercises: Exercises[] }) {
+export function Exercise({
+  exercises,
+  name,
+}: {
+  exercises: Exercises[];
+  name: string;
+}) {
   return (
     <div>
-      <Select>
+      <Select name={name}>
         <SelectTrigger className="w-full my-2">
           <SelectValue placeholder="Select an exercise" />
         </SelectTrigger>
@@ -22,7 +28,7 @@ export function Exercise({ exercises }: { exercises: Exercises[] }) {
           <SelectGroup>
             <SelectLabel></SelectLabel>
             {exercises.map((exercise) => (
-              <SelectItem value={exercise.exerciseId}>
+              <SelectItem value={exercise.exerciseId} key={exercise.exerciseId}>
                 {exercise.exerciseName}
               </SelectItem>
             ))}

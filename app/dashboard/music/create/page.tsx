@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -10,10 +9,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MotionDiv } from "@/components/ui/MotionDiv";
-import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
-
 import { IconArrowBack } from "@tabler/icons-react";
+import { createPlaylist } from "@/lib/actions";
 export default function CreateMusic() {
   return (
     <MotionDiv
@@ -28,31 +26,46 @@ export default function CreateMusic() {
           <CardTitle>Add an playlist</CardTitle>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={createPlaylist}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Name of the playlist" />
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Name of the playlist"
+                  required
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="link">Link</Label>
-                <Input id="link" placeholder="example.com/example-playlist" />
+                <Input
+                  id="link"
+                  name="link"
+                  placeholder="example.com/example-playlist"
+                  required
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="Genre">Note</Label>
-                <Input id="Genre" placeholder="Playlist genre" />
+                <Input
+                  id="Genre"
+                  name="genre"
+                  placeholder="Playlist genre"
+                  required
+                />
               </div>
+            </div>
+            <div className="flex justify-between mt-10">
+              <Link href="/dashboard/music">
+                <Button variant="outline">
+                  <IconArrowBack />
+                </Button>
+              </Link>
+              <Button type="submit">Add</Button>
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Link href="/dashboard/music">
-            <Button variant="outline">
-              <IconArrowBack />
-            </Button>
-          </Link>
-          <Button>Add </Button>
-        </CardFooter>
       </Card>
     </MotionDiv>
   );

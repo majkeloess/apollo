@@ -15,11 +15,17 @@ export default function Sets() {
         Set #{index + 1}
       </Label>
       <div className="flex flex-row gap-2">
-        <Input className="w-[60px]" placeholder="kg" id={`kg${index + 1}`} />
+        <Input
+          className="w-[60px]"
+          placeholder="kg"
+          id={`weight${index + 1}`}
+          name={`weight${index + 1}`}
+        />
         <Input
           className="w-[60px]"
           placeholder="reps"
           id={`reps${index + 1}`}
+          name={`reps${index + 1}`}
         />
       </div>
     </div>

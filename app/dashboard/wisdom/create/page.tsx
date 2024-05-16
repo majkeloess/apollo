@@ -11,8 +11,13 @@ import { Label } from "@/components/ui/label";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
-
 import { IconArrowBack } from "@tabler/icons-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wisdom Create",
+};
+
 export default function CreateWisdom() {
   return (
     <MotionDiv

@@ -7,6 +7,11 @@ import {
   AddedMusic,
   AddedWorkouts,
 } from "@/components/UserAddedData";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile",
+};
 
 export default async function ProfilePage() {
   const session = await auth();

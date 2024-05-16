@@ -4,6 +4,12 @@ import { IconPlus } from "@tabler/icons-react";
 import ArticlesCard from "@/components/ArticleCard";
 import { fetchArticles } from "@/lib/fetch";
 import { MotionDiv } from "@/components/ui/MotionDiv";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wisdom",
+};
+
 export default async function WisdomPage() {
   const musicData = await fetchArticles();
 

@@ -4,6 +4,12 @@ import { IconPlus } from "@tabler/icons-react";
 import MusicCard from "@/components/MusicCard";
 import { fetchMusic } from "@/lib/fetch";
 import { MotionDiv } from "@/components/ui/MotionDiv";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Music",
+};
+
 export default async function MusicPage() {
   const musicData = await fetchMusic();
 

@@ -5,7 +5,11 @@ import { MotionDiv } from "@/components/ui/MotionDiv";
 import ProgressCard from "@/components/ProgressCard";
 import CalendarCard from "@/components/CalendarCard";
 import LatestWorkouts from "@/components/LatestWorkouts";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Strength",
+};
 export default async function StrengthPage() {
   return (
     <MotionDiv

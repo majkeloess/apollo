@@ -6,8 +6,12 @@ import { ThemeProvider } from "next-themes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Apollo",
-  description: "Become a legend",
+  title: {
+    template: "%s | Apollo",
+    default: "Apollo",
+  },
+  description: "Become a legend. Discover a smarter stronger you.",
+  metadataBase: new URL("https://apollo.majkeloess.dev"),
 };
 
 export default function RootLayout({

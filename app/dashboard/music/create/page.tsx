@@ -12,6 +12,12 @@ import { MotionDiv } from "@/components/ui/MotionDiv";
 import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { createPlaylist } from "@/lib/actions";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Music Create",
+};
+
 export default function CreateMusic() {
   return (
     <MotionDiv

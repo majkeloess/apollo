@@ -14,6 +14,11 @@ import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { ExerciseBox } from "@/components/ExerciseForm";
 import { fetchExercises } from "@/lib/fetch";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Strength Create",
+};
 
 export default async function CreateStrength() {
   const exercises = await fetchExercises();

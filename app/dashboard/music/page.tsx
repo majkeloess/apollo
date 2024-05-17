@@ -5,6 +5,8 @@ import MusicCard from "@/components/MusicCard";
 import { fetchMusic } from "@/lib/fetch";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import MusicArticlesCardSkeleton from "@/components/skeletons/MusicArticlesCardSkeleton";
 
 export const metadata: Metadata = {
   title: "Music",
@@ -36,12 +38,14 @@ export default async function MusicPage() {
         </div>
         <div className="grid grid-cols-2 gap-6 items-center mx-6 mt-10 mb-32">
           {musicData.map((playlist) => (
-            <MusicCard
-              key={playlist.musicId}
-              name={playlist.musicName}
-              genre={playlist.genre}
-              link={playlist.musicLink}
-            />
+            <Suspense fallback={<MusicArticlesCardSkeleton />}>
+              <MusicCard
+                key={playlist.musicId}
+                name={playlist.musicName}
+                genre={playlist.genre}
+                link={playlist.musicLink}
+              />
+            </Suspense>
           ))}
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function FeedCard({
   photo: string;
 }) {
   return (
-    <div className="w-[350px] lg:w-[600px]">
+    <div className="w-[350px] lg:w-[500px]">
       <Card>
         <CardHeader className="flex flex-row gap-3 items-center">
           <Avatar>

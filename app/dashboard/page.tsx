@@ -8,8 +8,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      {" "}
-      <Feed />{" "}
+      <Feed />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import FeedCard from "./FeedCard";
+import FeedCardSkeleton from "./skeletons/FeedSkeleton";
 
 export default async function Feed() {
   return (

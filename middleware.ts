@@ -1,12 +1,8 @@
-import { auth } from "@/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
 
-export default auth((req) => {
-  if (!req.auth) {
-    const url = req.url.replace(req.nextUrl.pathname, "/");
-    return Response.redirect(url);
-  }
-});
+export default NextAuth(authConfig).auth;
 
 export const config = {
-  matcher: "/dashboard/:path*",
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

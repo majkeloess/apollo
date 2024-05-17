@@ -1,20 +1,16 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
-import ArticlesCard from "@/components/ArticleCard";
-import { fetchArticles } from "@/lib/fetch";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Metadata } from "next";
-import MusicArticlesCardSkeleton from "@/components/skeletons/MusicArticlesCardSkeleton";
 import { Suspense } from "react";
+import WisdomGenerator from "@/components/WisdomGenerator";
 
 export const metadata: Metadata = {
   title: "Wisdom",
 };
 
-export default async function WisdomPage() {
-  const musicData = await fetchArticles();
-
+export default function WisdomPage() {
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -36,18 +32,9 @@ export default async function WisdomPage() {
             </Button>
           </Link>
         </div>
-        <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
-          {musicData.map((article) => (
-            <Suspense fallback={<MusicArticlesCardSkeleton />}>
-              <ArticlesCard
-                key={article.articleId}
-                name={article.articlesName}
-                note={article.note}
-                link={article.articlesLink}
-              />
-            </Suspense>
-          ))}
-        </div>
+        <Suspense fallback={<WisdomGenerator />}>
+          <WisdomGenerator />
+        </Suspense>
       </div>
     </MotionDiv>
   );

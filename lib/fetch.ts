@@ -11,6 +11,7 @@ export async function fetchExercises() {
 
 export async function fetchMusic() {
   unstable_noStore();
+
   const musicData = await prisma.music.findMany();
 
   return musicData;

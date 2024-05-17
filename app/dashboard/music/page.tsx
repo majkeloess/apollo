@@ -1,20 +1,17 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
-import MusicCard from "@/components/MusicCard";
-import { fetchMusic } from "@/lib/fetch";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import MusicArticlesCardSkeleton from "@/components/skeletons/MusicArticlesCardSkeleton";
+import MusicGenerator from "@/components/MusicGenerator";
+import MusicSkeleton from "@/components/skeletons/MusicSkeleton";
 
 export const metadata: Metadata = {
   title: "Music",
 };
 
-export default async function MusicPage() {
-  const musicData = await fetchMusic();
-
+export default function MusicPage() {
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -36,18 +33,9 @@ export default async function MusicPage() {
             </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-6 items-center mx-6 mt-10 mb-32">
-          {musicData.map((playlist) => (
-            <Suspense fallback={<MusicArticlesCardSkeleton />}>
-              <MusicCard
-                key={playlist.musicId}
-                name={playlist.musicName}
-                genre={playlist.genre}
-                link={playlist.musicLink}
-              />
-            </Suspense>
-          ))}
-        </div>
+        <Suspense fallback={<MusicSkeleton />}>
+          <MusicGenerator />
+        </Suspense>
       </div>
     </MotionDiv>
   );

@@ -6,5 +6,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <div>{/* <Feed /> */}</div>;
+  return (
+    <div>
+      {" "}
+      <Feed />{" "}
+    </div>
+  );
 }

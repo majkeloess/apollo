@@ -5,14 +5,19 @@ import { Button } from "./ui/button";
 import React from "react";
 import { Exercise } from "./SelectExercise";
 import { Exercises } from "@prisma/client";
+
 export function ExerciseBox({ exercises }: { exercises: Exercises[] }) {
   const [exercise, setExercise] = React.useState(0);
   const exerciseElements = Array.from({ length: exercise }, (_, index) => (
     <div key={index}>
-      <Label key={index} htmlFor={`exersise${index + 1}`}>
+      <Label key={index} htmlFor={`exercise${index + 1}`}>
         Exercise #{index + 1}
       </Label>
-      <Exercise exercises={exercises} name={`exersise${index + 1}`} />
+      <Exercise
+        exercises={exercises}
+        index={index + 1}
+        name={`exercise${index + 1}`}
+      />
     </div>
   ));
   return (

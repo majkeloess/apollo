@@ -14,9 +14,11 @@ import { Exercises } from "@prisma/client";
 export function Exercise({
   exercises,
   name,
+  index,
 }: {
   exercises: Exercises[];
   name: string;
+  index: number;
 }) {
   return (
     <div>
@@ -35,7 +37,7 @@ export function Exercise({
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Sets />
+      <Sets index={index} />
     </div>
   );
 }

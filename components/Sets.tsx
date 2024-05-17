@@ -4,28 +4,30 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-export default function Sets() {
+export default function Sets({ index }: { index: number }) {
   const [sets, setSets] = React.useState(1);
-  const setsElements = Array.from({ length: sets }, (_, index) => (
+  const setsElements = Array.from({ length: sets }, (_, indexSets) => (
     <div
-      key={index}
+      key={indexSets}
       className="flex flex-row justify-end items-center gap-3 my-2"
     >
-      <Label key={index} htmlFor="Set">
-        Set #{index + 1}
+      <Label key={indexSets} htmlFor="Set">
+        Set #{indexSets + 1}
       </Label>
       <div className="flex flex-row gap-2">
         <Input
           className="w-[60px]"
           placeholder="kg"
-          id={`weight${index + 1}`}
-          name={`weight${index + 1}`}
+          id={`${index}weight${indexSets + 1}`}
+          name={`${index}weight${indexSets + 1}`}
+          required
         />
         <Input
           className="w-[60px]"
           placeholder="reps"
-          id={`reps${index + 1}`}
-          name={`reps${index + 1}`}
+          id={`${index}reps${indexSets + 1}`}
+          name={`${index}reps${indexSets + 1}`}
+          required
         />
       </div>
     </div>

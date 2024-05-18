@@ -16,10 +16,6 @@ const ArticleFormSchema = z.object({
   note: z.string(),
 });
 
-const WorkoutSchema = z.object({
-  note: z.string(),
-});
-
 const WorkoutDetailsSchema = z.object({
   workoutId: z.string(),
   exerciseId: z.string(),
@@ -28,10 +24,18 @@ const WorkoutDetailsSchema = z.object({
   weights: z.array(z.number()),
 });
 
+const WorkoutSchema = z.object({
+  note: z.string(),
+});
+const ExerciseIdSchema = z.array(z.string());
+const SetsSchema = z.array(z.number());
+const RepsSchema = z.array(z.array(z.number()));
+const WeightSchema = z.array(z.array(z.number()));
+
 export async function createWorkout(note: string) {
   try {
     const createdWorkout = await prisma.workout.create({
-      data: { workoutNote: note, creator: {} },
+      data: { workoutNote: note },
     });
 
     return createdWorkout.workoutId;
@@ -48,29 +52,57 @@ export async function createWorkoutDetails(formData: FormData) {
   });
   const workoutId = await createWorkout(note);
 
-  let exercisesNumber = 0;
-  //TODO: Get exer number
+  const exerKeyArr = Array.from(formData.keys()).filter((el) =>
+    el.includes("exercise")
+  );
+
   const exerciseIdArr = [];
   const setsArr = [];
   const weightsArr = [];
   const repetitionsArr = [];
-  for (let i = 0; i < exercisesNumber; i++) {
-    //TODO: Update arrays
+
+  for (let i = 0; i < exerKeyArr.length; i++) {
+    const repsExer = [];
+    const weightsExer = [];
+
+    const setsKeyArr = Array.from(formData.keys()).filter((el) =>
+      el.includes(`${i + 1}reps`)
+    );
+
+    for (let set = 0; set < setsKeyArr.length; set++) {
+      repsExer.push(Number(formData.get(`${i + 1}reps${set + 1}`)));
+      weightsExer.push(Number(formData.get(`${i + 1}weight${set + 1}`)));
+    }
+
+    exerciseIdArr.push(formData.get(`exercise${i + 1}`));
+    setsArr.push(setsKeyArr.length);
+    weightsArr.push(weightsExer);
+    repetitionsArr.push(repsExer);
   }
+
+  console.log(exerciseIdArr);
+  console.log(setsArr);
+  console.log(weightsArr);
+  console.log(repetitionsArr);
+  const exerciseIdValid = ExerciseIdSchema.parse(exerciseIdArr);
+  const setsValid = SetsSchema.parse(setsArr);
+  const weightsValid = WeightSchema.parse(weightsArr);
+  const repsValid = RepsSchema.parse(repetitionsArr);
+
   try {
-    for (let i = 0; i < exercisesNumber; i++) {
+    for (let i = 0; i < exerKeyArr.length; i++) {
       await prisma.workoutDetails.create({
         data: {
           workoutId: workoutId,
-          exerciseId: exerciseIdArr[i],
-          sets: setsArr[i],
-          weights: weightsArr[i],
-          repetitions: repetitionsArr[i],
+          exerciseId: exerciseIdValid[i],
+          sets: setsValid[i],
+          repetitions: repsValid[i],
+          weights: weightsValid[i],
         },
       });
     }
   } catch (error) {
-    throw new Error("Error with creating workout details!");
+    throw error;
   } finally {
     await prisma.$disconnect();
   }

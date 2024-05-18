@@ -11,11 +11,14 @@ import { createWorkoutDetails } from "@/lib/actions";
 
 export default function FormExercises({
   exercises,
+  id,
 }: {
   exercises: Exercises[];
+  id: string;
 }) {
+  const bindedWorkoutDetails = createWorkoutDetails.bind(null, id);
   return (
-    <form action={createWorkoutDetails}>
+    <form action={bindedWorkoutDetails}>
       <div className="grid w-full items-center gap-4">
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="Note">Note</Label>

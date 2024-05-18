@@ -6,9 +6,11 @@ import {
   AddedMusic,
   AddedWorkouts,
 } from "@/components/UserAddedData";
+import { fetchUserData } from "@/lib/fetch";
 
-export default async function ProfilePage() {
-  const session = await auth();
+export default async function ProfilePage({ id }: { id: string }) {
+  const profileData = await fetchUserData(id);
+
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -19,18 +21,18 @@ export default async function ProfilePage() {
     >
       <div className="mt-28">
         <div className="flex flex-row w-full gap-6 items-center justify-center">
-          {session?.user?.image && (
+          {profileData?.image && (
             <Avatar className="w-[100px] h-[100px]">
-              <AvatarImage src={session?.user?.image} alt="profile image" />
+              <AvatarImage src={profileData.image} alt="profile image" />
             </Avatar>
           )}
           <div>
             <h1 className="text-3xl font-medium">
               <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-                {session?.user?.name}
+                {profileData?.name}
               </span>
             </h1>
-            <p>Hip-hop nigdy stop</p>
+            <p>{profileData?.createdAt.toString().split("G")[0]}</p>
           </div>
         </div>
         <div className="flex flex-row gap-10 justify-center mt-8">
@@ -55,9 +57,9 @@ export default async function ProfilePage() {
         </div>
         <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div>
         <div className="mt-10 flex flex-col gap-10 justify-center mb-28">
-          <AddedWorkouts name={session?.user?.name} />
-          <AddedArticles name={session?.user?.name} />
-          <AddedMusic name={session?.user?.name} />
+          <AddedWorkouts name={profileData?.name} />
+          <AddedArticles name={profileData?.name} />
+          <AddedMusic name={profileData?.name} />
         </div>
       </div>
     </MotionDiv>

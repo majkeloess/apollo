@@ -3,7 +3,7 @@ import NavbarAbout from "@/components/NavbarAbout";
 import Image from "next/image";
 import { InfiniteMoving } from "@/components/MovingCards";
 import HeroSection from "@/components/HeroSection";
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <div className="relative">
       <NavbarAbout />

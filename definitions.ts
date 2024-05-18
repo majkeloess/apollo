@@ -1,3 +1,4 @@
+import z from "zod";
 export interface Exercises {
   exerciseId: string;
   exerciseName: string;
@@ -38,3 +39,22 @@ export interface Articles {
   link: string;
   note: string;
 }
+
+const SessionUserSchema = z.object({
+  name: z.string(),
+  image: z.string(),
+  email: z.string(),
+});
+
+const UserDataSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  //nickname: z.string(),
+  email: z.string(),
+  //emailVerified: z.date(),
+  image: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export { SessionUserSchema, UserDataSchema };

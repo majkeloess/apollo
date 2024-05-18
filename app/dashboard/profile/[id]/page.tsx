@@ -7,10 +7,12 @@ export const metadata: Metadata = {
   title: "Profile",
 };
 
-export default async function Page() {
+export default function Page({ params }: { params: { id: string } }) {
+  const id = params.id;
+
   return (
     <Suspense fallback={<ProfileSkeleton />}>
-      <ProfilePage />
+      <ProfilePage id={id} />
     </Suspense>
   );
 }

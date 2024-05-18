@@ -13,12 +13,20 @@ import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { createPlaylist } from "@/lib/actions";
 import { Metadata } from "next";
-
+import { auth } from "@/auth";
+import { SessionUserSchema } from "@/definitions";
+import { fetchIdFromSession } from "@/lib/fetch";
 export const metadata: Metadata = {
   title: "Music Create",
 };
 
-export default function CreateMusic() {
+export default async function CreateMusic() {
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const id = await fetchIdFromSession(name);
+
+  const bindedPlaylist = createPlaylist.bind(null, id);
+
   return (
     <MotionDiv
       className="w-full h-screen flex items-center justify-center"
@@ -32,7 +40,7 @@ export default function CreateMusic() {
           <CardTitle>Add an playlist</CardTitle>
         </CardHeader>
         <CardContent>
-          <form action={createPlaylist}>
+          <form action={bindedPlaylist}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Name</Label>
@@ -53,7 +61,7 @@ export default function CreateMusic() {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="Genre">Note</Label>
+                <Label htmlFor="Genre">Genre</Label>
                 <Input
                   id="Genre"
                   name="genre"

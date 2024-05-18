@@ -32,10 +32,10 @@ const SetsSchema = z.array(z.number());
 const RepsSchema = z.array(z.array(z.number()));
 const WeightSchema = z.array(z.array(z.number()));
 
-export async function createWorkout(note: string) {
+export async function createWorkout(note: string, id: string) {
   try {
     const createdWorkout = await prisma.workout.create({
-      data: { workoutNote: note },
+      data: { workoutNote: note, createdBy: id },
     });
 
     return createdWorkout.workoutId;
@@ -46,11 +46,11 @@ export async function createWorkout(note: string) {
   }
 }
 
-export async function createWorkoutDetails(formData: FormData) {
+export async function createWorkoutDetails(id: string, formData: FormData) {
   const { note } = WorkoutSchema.parse({
     note: formData.get("note"),
   });
-  const workoutId = await createWorkout(note);
+  const workoutId = await createWorkout(note, id);
 
   const exerKeyArr = Array.from(formData.keys()).filter((el) =>
     el.includes("exercise")
@@ -110,7 +110,7 @@ export async function createWorkoutDetails(formData: FormData) {
   redirect("/dashboard/strength");
 }
 
-export async function createPlaylist(formData: FormData) {
+export async function createPlaylist(id: string, formData: FormData) {
   const { musicName, musicLink, genre } = PlaylistFormSchema.parse({
     musicName: formData.get("name"),
     musicLink: formData.get("link"),
@@ -123,6 +123,7 @@ export async function createPlaylist(formData: FormData) {
         musicName: musicName,
         musicLink: musicLink,
         genre: genre,
+        createdBy: id,
       },
     });
   } catch (error) {
@@ -135,7 +136,7 @@ export async function createPlaylist(formData: FormData) {
   redirect("/dashboard/music");
 }
 
-export async function createArticle(formData: FormData) {
+export async function createArticle(id: string, formData: FormData) {
   const { articlesName, articlesLink, note } = ArticleFormSchema.parse({
     articlesName: formData.get("name"),
     articlesLink: formData.get("link"),
@@ -148,6 +149,7 @@ export async function createArticle(formData: FormData) {
         articlesName: articlesName,
         articlesLink: articlesLink,
         note: note,
+        createdBy: id,
       },
     });
   } catch (error) {

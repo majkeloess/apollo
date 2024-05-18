@@ -13,12 +13,21 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { Metadata } from "next";
+import { createArticle } from "@/lib/actions";
+import { SessionUserSchema } from "@/definitions";
+import { auth } from "@/auth";
+import { fetchIdFromSession } from "@/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Wisdom Create",
 };
 
-export default function CreateWisdom() {
+export default async function CreateWisdom() {
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const id = await fetchIdFromSession(name);
+
+  const bindedArticle = createArticle.bind(null, id);
   return (
     <MotionDiv
       className="w-full h-screen flex items-center justify-center"
@@ -33,7 +42,7 @@ export default function CreateWisdom() {
           <CardDescription>Give us more knowledge.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={bindedArticle}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Name</Label>

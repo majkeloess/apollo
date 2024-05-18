@@ -12,6 +12,8 @@ export default async function MusicGenerator() {
           name={playlist.musicName}
           genre={playlist.genre}
           link={playlist.musicLink}
+          createdAt={playlist.createdAt.toString().split("G")[0]}
+          createdBy={playlist.createdBy}
         />
       ))}
     </div>

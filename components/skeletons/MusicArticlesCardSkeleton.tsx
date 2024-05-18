@@ -6,7 +6,7 @@ export default function MusicArticlesCardSkeleton() {
     <Card className="w-full">
       <CardHeader>
         <Skeleton className="w-full h-6" />
-        <Skeleton className="w-48 h-4" />
+        <Skeleton className="lg:w-48 w-20 h-4" />
       </CardHeader>
     </Card>
   );

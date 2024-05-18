@@ -5,6 +5,7 @@ import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import WisdomGenerator from "@/components/WisdomGenerator";
+import WisdomSkeleton from "@/components/skeletons/WisdomSkeleton";
 
 export const metadata: Metadata = {
   title: "Wisdom",
@@ -32,7 +33,7 @@ export default function WisdomPage() {
             </Button>
           </Link>
         </div>
-        <Suspense fallback={<WisdomGenerator />}>
+        <Suspense fallback={<WisdomSkeleton />}>
           <WisdomGenerator />
         </Suspense>
       </div>

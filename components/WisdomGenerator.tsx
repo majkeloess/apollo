@@ -11,6 +11,8 @@ export default async function WisdomGenerator() {
           name={article.articlesName}
           note={article.note}
           link={article.articlesLink}
+          createdAt={article.createdAt.toString().split("G")[0]}
+          createdBy={article.createdBy}
         />
       ))}
     </div>

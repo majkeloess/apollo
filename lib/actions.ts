@@ -157,4 +157,6 @@ export async function createArticle(id: string, formData: FormData) {
   } finally {
     await prisma.$disconnect();
   }
+  revalidatePath("/dashboard/wisdom");
+  redirect("/dashboard/wisdom");
 }

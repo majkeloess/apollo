@@ -26,7 +26,12 @@ export default async function WorkoutTable({
             return (
               <TableRow key={index}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
-                <TableCell>{exerciseInfo.exerciseName}</TableCell>
+                <TableCell>
+                  {" "}
+                  <span className="font-medium bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+                    {exerciseInfo.exerciseName}
+                  </span>
+                </TableCell>
                 <TableCell>{exerciseInfo.muscleGroup}</TableCell>
                 <TableCell>
                   <WorkoutSetsTable

@@ -49,8 +49,8 @@ export async function fetchExerciseInfo(exerciseId: string) {
 export async function fetchIdFromSession(name: string) {
   unstable_noStore();
   const userData = await prisma.user.findFirst({
-    orderBy: {
-      createdAt: "desc",
+    where: {
+      name: name,
     },
   });
   const validatedData = UserDataSchema.parse(userData);
@@ -61,7 +61,11 @@ export async function fetchIdFromSession(name: string) {
 export async function fetchWorkouts() {
   unstable_noStore();
 
-  const workoutData = await prisma.workout.findMany({});
+  const workoutData = await prisma.workout.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return workoutData;
 }

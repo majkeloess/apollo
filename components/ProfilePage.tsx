@@ -40,19 +40,19 @@ export default async function ProfilePage({ id }: { id: string }) {
             <li className="dark:text-gray-400 text-gray-500 text-xl">
               Trainings
             </li>
-            <li className="font-bold text-xl text-end">121</li>
+            <li className="font-bold text-xl text-end">[TODO]</li>
           </ul>
           <ul>
             <li className="dark:text-gray-400 text-gray-500 text-xl">
               Followers
             </li>
-            <li className="font-bold text-xl text-end">23</li>
+            <li className="font-bold text-xl text-end">[TODO]</li>
           </ul>
           <ul>
             <li className="dark:text-gray-400 text-gray-500 text-xl">
               Following
             </li>
-            <li className="font-bold text-xl text-end">11</li>
+            <li className="font-bold text-xl text-end"></li>
           </ul>
         </div>
         <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div>

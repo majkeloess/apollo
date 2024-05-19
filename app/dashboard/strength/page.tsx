@@ -4,7 +4,6 @@ import Link from "next/link";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import ProgressCard from "@/components/ProgressCard";
 import CalendarCard from "@/components/CalendarCard";
-import LatestWorkouts from "@/components/LatestWorkouts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,7 +34,6 @@ export default async function StrengthPage() {
         <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
           <ProgressCard />
           <CalendarCard />
-          <LatestWorkouts />
         </div>
       </div>
     </MotionDiv>

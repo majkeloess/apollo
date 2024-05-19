@@ -62,4 +62,41 @@ const ExerciseDataSchema = z.object({
   muscleGroup: z.string(),
 });
 
-export { SessionUserSchema, UserDataSchema, ExerciseDataSchema };
+const ArticlesDataSchema = z.array(
+  z.object({
+    articleId: z.string(),
+    articlesName: z.string(),
+    articlesLink: z.string(),
+    note: z.string(),
+    createdAt: z.date(),
+    createdBy: z.string(),
+  })
+);
+
+const WorkoutsDataSchema = z.array(
+  z.object({
+    workoutId: z.string(),
+    workoutNote: z.string(),
+    createdAt: z.date(),
+    createdBy: z.string(),
+  })
+);
+const MusicDataSchema = z.array(
+  z.object({
+    musicId: z.string(),
+    musicName: z.string(),
+    musicLink: z.string(),
+    genre: z.string(),
+    createdAt: z.date(),
+    createdBy: z.string(),
+  })
+);
+
+export {
+  SessionUserSchema,
+  UserDataSchema,
+  ExerciseDataSchema,
+  ArticlesDataSchema,
+  WorkoutsDataSchema,
+  MusicDataSchema,
+};

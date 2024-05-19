@@ -26,6 +26,7 @@ export default function FormExercises({
             id="Note"
             name="note"
             placeholder="Your feelings from workout"
+            required
           />
         </div>
         <div className="h-0.5 my-4 dark:bg-gray-800 bg-gray-200"></div>

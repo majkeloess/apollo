@@ -80,10 +80,6 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
     repetitionsArr.push(repsExer);
   }
 
-  console.log(exerciseIdArr);
-  console.log(setsArr);
-  console.log(weightsArr);
-  console.log(repetitionsArr);
   const exerciseIdValid = ExerciseIdSchema.parse(exerciseIdArr);
   const setsValid = SetsSchema.parse(setsArr);
   const weightsValid = WeightSchema.parse(weightsArr);

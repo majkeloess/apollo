@@ -1,6 +1,6 @@
 import { unstable_noStore } from "next/cache";
 import prisma from "./prisma";
-import { UserDataSchema } from "@/definitions";
+import { UserDataSchema, ExerciseDataSchema } from "@/definitions";
 
 export async function fetchUserData(id: string) {
   unstable_noStore();
@@ -34,16 +34,48 @@ export async function fetchArticles() {
   return articlesData;
 }
 
+export async function fetchExerciseInfo(exerciseId: string) {
+  unstable_noStore();
+  const exerciseData = await prisma.exercises.findUnique({
+    where: {
+      exerciseId: exerciseId,
+    },
+  });
+  const validatedExerciseData = ExerciseDataSchema.parse(exerciseData);
+
+  return validatedExerciseData;
+}
+
 export async function fetchIdFromSession(name: string) {
   unstable_noStore();
   const userData = await prisma.user.findFirst({
-    where: {
-      name: name,
+    orderBy: {
+      createdAt: "desc",
     },
   });
   const validatedData = UserDataSchema.parse(userData);
 
   return validatedData.id;
+}
+
+export async function fetchWorkouts() {
+  unstable_noStore();
+
+  const workoutData = await prisma.workout.findMany({});
+
+  return workoutData;
+}
+
+export async function fetchWorkoutDetails(workoutId: string) {
+  unstable_noStore();
+
+  const workoutDetailsData = await prisma.workoutDetails.findMany({
+    where: {
+      workoutId: workoutId,
+    },
+  });
+
+  return workoutDetailsData;
 }
 
 export async function deleteData() {

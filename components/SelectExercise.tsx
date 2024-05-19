@@ -22,7 +22,7 @@ export function Exercise({
 }) {
   return (
     <div>
-      <Select name={name}>
+      <Select name={name} required>
         <SelectTrigger className="w-full my-2">
           <SelectValue placeholder="Select an exercise" />
         </SelectTrigger>

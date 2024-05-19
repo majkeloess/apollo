@@ -56,5 +56,10 @@ const UserDataSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
+const ExerciseDataSchema = z.object({
+  exerciseId: z.string(),
+  exerciseName: z.string(),
+  muscleGroup: z.string(),
+});
 
-export { SessionUserSchema, UserDataSchema };
+export { SessionUserSchema, UserDataSchema, ExerciseDataSchema };

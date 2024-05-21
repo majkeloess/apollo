@@ -20,3 +20,19 @@ export function ObjectSets(reps: number[], weights: number[], sets: number) {
 
   return objectSets;
 }
+
+function getWeekDates(date = new Date()) {
+  const dayOfWeek = date.getDay();
+  const startOfWeek = new Date(date);
+  startOfWeek.setDate(date.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  return [startOfWeek, endOfWeek];
+}
+
+export function filterDatesByCurrentWeek(dates: Date[]) {
+  const [startOfWeek, endOfWeek] = getWeekDates();
+  return dates.filter((date) => {
+    return date >= startOfWeek && date <= endOfWeek;
+  });
+}

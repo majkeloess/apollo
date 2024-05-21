@@ -1,40 +1,60 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { MotionDiv } from "@/components/ui/MotionDiv";
+import { fetchExercises, fetchIdFromSession } from "@/lib/fetch";
+import { Metadata } from "next";
+import FormExercises from "@/components/FormExercises";
+import { auth } from "@/auth";
+import { SessionUserSchema } from "@/definitions";
 import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
-import { MotionDiv } from "@/components/ui/MotionDiv";
-import ProgressCard from "@/components/ProgressCard";
-import CalendarCard from "@/components/CalendarCard";
-import { Metadata } from "next";
-
 export const metadata: Metadata = {
-  title: "Strength",
+  title: "Strength ",
 };
+
 export default async function StrengthPage() {
+  const exercises = await fetchExercises();
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const id = await fetchIdFromSession(name);
+
   return (
     <MotionDiv
+      className="w-full h-screen flex justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ type: "spring", duration: 1 }}
       exit={{ opacity: 0 }}
-      className="w-full flex justify-center"
     >
-      <div className="mt-24">
-        <div className="flex flex-row justify-center gap-16 items-center font-bold my-4">
-          <div className="text-5xl text-center">
-            <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-              Strength
-            </span>
+      <div className="my-24 ">
+        <Card className="w-[350px] mt-8">
+          <CardHeader>
+            <CardTitle>Add workout</CardTitle>
+            <CardDescription>Unleash the beast.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FormExercises exercises={exercises} id={id} />
+          </CardContent>
+        </Card>
+        <Card className="w-[350px] mt-12 mb-8">
+          <div className="flex flex-row items-center gap-8">
+            <CardHeader>
+              <CardTitle>Missing an exercise?</CardTitle>
+              <CardDescription>You can add one easily.</CardDescription>
+            </CardHeader>
+            <Link href="/dashboard/exercise/create">
+              <Button variant="secondary">
+                <IconPlus />
+              </Button>
+            </Link>
           </div>
-          <Link href="/dashboard/strength/create">
-            <Button variant="outline">
-              <IconPlus />
-            </Button>
-          </Link>
-        </div>
-        <div className="flex flex-col gap-6 items-center justify-center mt-10 mb-32">
-          <ProgressCard />
-          <CalendarCard />
-        </div>
+        </Card>
       </div>
     </MotionDiv>
   );

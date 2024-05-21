@@ -1,36 +1,17 @@
 "use server";
-import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import prisma from "./prisma";
-
-const PlaylistFormSchema = z.object({
-  musicName: z.string(),
-  musicLink: z.string(),
-  genre: z.string(),
-});
-
-const ArticleFormSchema = z.object({
-  articlesName: z.string(),
-  articlesLink: z.string(),
-  note: z.string(),
-});
-
-const WorkoutDetailsSchema = z.object({
-  workoutId: z.string(),
-  exerciseId: z.string(),
-  sets: z.number(),
-  repetitions: z.array(z.number()),
-  weights: z.array(z.number()),
-});
-
-const WorkoutSchema = z.object({
-  note: z.string(),
-});
-const ExerciseIdSchema = z.array(z.string());
-const SetsSchema = z.array(z.number());
-const RepsSchema = z.array(z.array(z.number()));
-const WeightSchema = z.array(z.array(z.number()));
+import {
+  WorkoutSchema,
+  ExerciseIdSchema,
+  SetsSchema,
+  WeightSchema,
+  RepsSchema,
+  PlaylistFormSchema,
+  ExerciseFormSchema,
+  ArticleFormSchema,
+} from "@/definitions";
 
 export async function createWorkout(note: string, id: string) {
   try {
@@ -130,6 +111,28 @@ export async function createPlaylist(id: string, formData: FormData) {
 
   revalidatePath("/dashboard/music");
   redirect("/dashboard/music");
+}
+
+export async function createExercise(formData: FormData) {
+  const { exerciseName, muscleGroup } = ExerciseFormSchema.parse({
+    exerciseName: formData.get("name"),
+    muscleGroup: formData.get("muscle"),
+  });
+
+  try {
+    await prisma.exercises.create({
+      data: {
+        exerciseName: exerciseName,
+        muscleGroup: muscleGroup,
+      },
+    });
+  } catch (error) {
+    throw new Error("Problem with adding an exercise!");
+  } finally {
+    prisma.$disconnect();
+  }
+  revalidatePath("/dashboard/strength");
+  redirect("/dashboard/strength");
 }
 
 export async function createArticle(id: string, formData: FormData) {

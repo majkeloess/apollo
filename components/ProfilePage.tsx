@@ -7,6 +7,7 @@ import {
   fetchUserWorkouts,
   fetchUserMusic,
 } from "@/lib/fetch";
+import CalendarCard from "./CalendarCard";
 
 export default async function ProfilePage({ id }: { id: string }) {
   const profileDataPre = fetchUserData(id);
@@ -67,6 +68,8 @@ export default async function ProfilePage({ id }: { id: string }) {
         </div>
         {/* <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div> */}
         <div className="mt-10 mx-8 flex flex-col justify-center gap-10 mb-28">
+          <CalendarCard name={profileData.name} workouts={workoutsData} />
+
           <ProfileCard
             name={profileData.name}
             data={workoutsData}

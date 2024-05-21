@@ -20,6 +20,10 @@ export function Exercise({
   name: string;
   index: number;
 }) {
+  const data = exercises.map((exercise) => ({
+    value: exercise.exerciseName,
+    label: exercise.exerciseName,
+  }));
   return (
     <div>
       <Select name={name} required>

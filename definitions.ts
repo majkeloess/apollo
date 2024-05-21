@@ -40,6 +40,39 @@ export interface Articles {
   note: string;
 }
 
+const PlaylistFormSchema = z.object({
+  musicName: z.string(),
+  musicLink: z.string(),
+  genre: z.string(),
+});
+
+const ArticleFormSchema = z.object({
+  articlesName: z.string(),
+  articlesLink: z.string(),
+  note: z.string(),
+});
+
+const ExerciseFormSchema = z.object({
+  exerciseName: z.string(),
+  muscleGroup: z.string(),
+});
+
+const WorkoutDetailsSchema = z.object({
+  workoutId: z.string(),
+  exerciseId: z.string(),
+  sets: z.number(),
+  repetitions: z.array(z.number()),
+  weights: z.array(z.number()),
+});
+
+const WorkoutSchema = z.object({
+  note: z.string(),
+});
+const ExerciseIdSchema = z.array(z.string());
+const SetsSchema = z.array(z.number());
+const RepsSchema = z.array(z.array(z.number()));
+const WeightSchema = z.array(z.array(z.number()));
+
 const SessionUserSchema = z.object({
   name: z.string(),
   image: z.string(),
@@ -99,4 +132,12 @@ export {
   ArticlesDataSchema,
   WorkoutsDataSchema,
   MusicDataSchema,
+  WorkoutSchema,
+  ExerciseIdSchema,
+  SetsSchema,
+  WeightSchema,
+  RepsSchema,
+  PlaylistFormSchema,
+  ExerciseFormSchema,
+  ArticleFormSchema,
 };

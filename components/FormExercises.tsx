@@ -35,12 +35,7 @@ export default function FormExercises({
           <ExerciseBox exercises={exercises} />
         </div>
       </div>
-      <div className="flex justify-between mt-6 mb-28">
-        <Link href="/dashboard/strength">
-          <Button variant="outline">
-            <IconArrowBack />
-          </Button>
-        </Link>
+      <div className="flex justify-end mt-6">
         <Button>Add </Button>
       </div>
     </form>

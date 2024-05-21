@@ -38,7 +38,7 @@ export default function HeroSection() {
             </p>
           </MotionDiv>
         </div>
-        <MotionDiv
+        {/* <MotionDiv
           initial={{
             opacity: 0,
             y: 20,
@@ -65,8 +65,8 @@ export default function HeroSection() {
             <AppleButton />
             <GooglePlayButton />
           </div>
-        </MotionDiv>
-        <MotionDiv
+        </MotionDiv> */}
+        {/* <MotionDiv
           initial={{
             opacity: 0,
             y: 20,
@@ -93,7 +93,7 @@ export default function HeroSection() {
             <AppleButton />
             <GooglePlayButton />
           </div>
-        </MotionDiv>
+        </MotionDiv> */}
       </div>
       <MotionDiv
         initial={{ x: 100, opacity: 0 }}

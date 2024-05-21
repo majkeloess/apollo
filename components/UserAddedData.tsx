@@ -31,7 +31,7 @@ export function ProfileCard({
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">
             <CardTitle>
-              {nameSplit[0] ? `${nameSplit[0]}'s ${type}` : ""}
+              {nameSplit[0] ? `${nameSplit[0]} ${type}` : ""}
             </CardTitle>
           </div>
         </CardHeader>

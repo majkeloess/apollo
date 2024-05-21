@@ -13,6 +13,7 @@ import { IconBolt, IconMessage, IconShare } from "@tabler/icons-react";
 import { fetchUserData } from "@/lib/fetch";
 import WorkoutTable from "./WorkoutTable";
 import Link from "next/link";
+import CopyButton from "./CopyButton";
 
 export default async function FeedCard({
   workoutId,
@@ -60,9 +61,9 @@ export default async function FeedCard({
               </Button>
             </li>
             <li className="w-1/3">
-              <Button className="w-full" variant="outline">
-                <IconShare />
-              </Button>
+              <CopyButton
+                link={`apollo-preview.vercel.app/workout/${workoutId}`}
+              />
             </li>
           </ul>
         </CardFooter>

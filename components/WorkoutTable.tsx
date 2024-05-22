@@ -1,7 +1,6 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { fetchExerciseInfo, fetchWorkoutDetails } from "@/lib/fetch";
 import WorkoutSetsTable from "./WorkoutSetsTable";
-import TrainingSummary from "./TrainingSummary";
 
 export default async function WorkoutTable({
   workoutId,

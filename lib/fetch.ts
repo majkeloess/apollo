@@ -6,6 +6,7 @@ import {
   ArticlesDataSchema,
   MusicDataSchema,
   WorkoutsDataSchema,
+  OneWorkoutDataSchema,
 } from "@/definitions";
 
 export async function fetchExercises() {
@@ -136,6 +137,16 @@ export async function fetchUserWorkouts(id: string) {
     },
   });
   const validatedWorkoutData = WorkoutsDataSchema.parse(workoutsData);
+
+  return validatedWorkoutData;
+}
+export async function fetchUserByWorkout(workoutId: string) {
+  const workoutsData = await prisma.workout.findFirst({
+    where: {
+      workoutId: workoutId,
+    },
+  });
+  const validatedWorkoutData = OneWorkoutDataSchema.parse(workoutsData);
 
   return validatedWorkoutData;
 }

@@ -105,6 +105,12 @@ const ArticlesDataSchema = z.array(
     createdBy: z.string(),
   })
 );
+const OneWorkoutDataSchema = z.object({
+  workoutId: z.string(),
+  workoutNote: z.string(),
+  createdAt: z.date(),
+  createdBy: z.string(),
+});
 
 const WorkoutsDataSchema = z.array(
   z.object({
@@ -140,4 +146,5 @@ export {
   PlaylistFormSchema,
   ExerciseFormSchema,
   ArticleFormSchema,
+  OneWorkoutDataSchema,
 };

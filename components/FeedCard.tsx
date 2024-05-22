@@ -61,9 +61,7 @@ export default async function FeedCard({
               </Button>
             </li>
             <li className="w-1/3">
-              <CopyButton
-                link={`apollo-preview.vercel.app/workout/${workoutId}`}
-              />
+              <CopyButton link={`localhost:3000/workout/${workoutId}`} />
             </li>
           </ul>
         </CardFooter>

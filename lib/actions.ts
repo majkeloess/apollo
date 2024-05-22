@@ -83,8 +83,8 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
   } finally {
     await prisma.$disconnect();
   }
-  revalidatePath("/dashboard/strength");
-  redirect("/dashboard/strength");
+  revalidatePath("/dashboard");
+  redirect("/dashboard");
 }
 
 export async function createPlaylist(id: string, formData: FormData) {

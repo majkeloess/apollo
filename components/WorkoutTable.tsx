@@ -10,18 +10,12 @@ export default async function WorkoutTable({
 }) {
   const workoutDetailsData = await fetchWorkoutDetails(workoutId);
 
-  const groups: string[] = [];
-  let totalLoad = 0;
   return (
     <div className="w-full flex flex-col justify-center">
-      {/* <TrainingSummary groups={groups} totalLoad={totalLoad} /> */}
       <Table>
         <TableBody>
           {workoutDetailsData.map(async (details, index) => {
             const exerciseInfo = await fetchExerciseInfo(details.exerciseId);
-            if (!groups.includes(exerciseInfo.muscleGroup)) {
-              groups.push(exerciseInfo.muscleGroup);
-            }
 
             return (
               <TableRow key={index}>

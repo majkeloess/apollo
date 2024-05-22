@@ -137,13 +137,13 @@ const prisma = new PrismaClient();
 async function seed() {
   try {
     await prisma.articles.createMany({ data: articles });
-    await prisma.exercises.createMany({ data: exercises });
+    //await prisma.exercises.createMany({ data: exercises });
     await prisma.music.createMany({ data: playlists });
 
 
   } catch (error) {
 
-    throw new Error("Prisma seeding error!");
+    console.log(error);
 
   } finally {
     await prisma.$disconnect();

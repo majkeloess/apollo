@@ -19,7 +19,7 @@ export default function WorkoutSetsTable({
 
   return hidden ? (
     <Button
-      variant="ghost"
+      variant="list"
       className="pl-8 pr-0"
       onClick={() => setHidden(false)}
     >

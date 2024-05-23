@@ -18,17 +18,17 @@ export default function AboutNavbar() {
         <div className="xl:flex gap-10 items-center text-xl">
           <li className="dark:block hidden">
             <Link href="/">
-              <Image src="/watermark.png" alt="Apollo" width={80} height={40} />
+              <Image
+                src="/a_main_black.png"
+                alt="Apollo"
+                width={50}
+                height={50}
+              />
             </Link>
           </li>
           <li className="dark:hidden">
             <Link href="/">
-              <Image
-                src="/watermark_w.png"
-                alt="Apollo"
-                width={80}
-                height={40}
-              />
+              <Image src="/a_main.png" alt="Apollo" width={50} height={50} />
             </Link>
           </li>
         </div>

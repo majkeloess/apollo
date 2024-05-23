@@ -131,6 +131,6 @@ model WorkoutDetails {
   exercise Exercises @relation(fields: [exerciseId], references: [exerciseId])
   sets              Int
   repetitions       Int[]
-  weights           Int[]
+  weights           Float[]
 
 }

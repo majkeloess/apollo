@@ -2,13 +2,12 @@ import Footer from "@/components/Footer";
 import NavbarAbout from "@/components/NavbarAbout";
 import Image from "next/image";
 import { InfiniteMoving } from "@/components/MovingCards";
-import { HeroGrid } from "@/components/HeroGrid";
+import HeroSectionRemastered from "@/components/HeroSectionRemastered";
 export default async function HomePage() {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <NavbarAbout />
-      {/* <HeroSection /> */}
-      <HeroGrid />
+      <HeroSectionRemastered />
       <InfiniteMoving />
       <div className="flex w-full items-center justify-center">
         <p className="text-4xl xl:text-6xl font-bold m-10 ">

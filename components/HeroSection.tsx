@@ -101,15 +101,28 @@ export default function HeroSection() {
         transition={{ type: "spring", delay: 2.5, duration: 1 }}
         className="xl:w-1/2 xl:flex xl:items-center xl:justify-center"
       >
-        <div className="bg-black dark:bg-gray-200 w-[270px] h-[536px]  rounded-[40px] xl:flex items-center justify-center dark:shadow-gray-400 shadow-phone hidden">
-          <div className="bg-slay  w-[252px] h-[520px] rounded-[32px] flex justify-center items-center">
-            <Image
-              src="/watermark.png"
-              width={159}
-              height={81}
-              alt="her"
-              priority
-            />
+        <div className="flex flex-row gap-12">
+          <div className="bg-black dark:bg-gray-200 w-[270px] h-[536px]  rounded-[40px] xl:flex items-center justify-center dark:shadow-gray-400 shadow-phone hidden">
+            <div className="bg-slay  w-[252px] h-[520px] rounded-[32px] flex justify-center items-center">
+              <Image
+                src="/card1.png"
+                alt="her"
+                width={252}
+                height={520}
+                className="rounded-[32px] object-cover"
+              />
+            </div>
+          </div>
+          <div className="bg-black dark:bg-gray-200 w-[270px] h-[536px]  rounded-[40px] xl:flex items-center justify-center dark:shadow-gray-400 shadow-phone hidden">
+            <div className="bg-slay  w-[252px] h-[520px] rounded-[32px] flex justify-center items-center">
+              <Image
+                src="/card2.png"
+                alt="her"
+                width={252}
+                height={520}
+                className="rounded-[32px] object-cover"
+              />
+            </div>
           </div>
         </div>
       </MotionDiv>

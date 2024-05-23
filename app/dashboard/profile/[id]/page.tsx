@@ -1,8 +1,8 @@
-import { Metadata } from "next";
 import { Suspense } from "react";
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
 import ProfilePage from "@/components/ProfilePage";
 
+import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Profile",
 };

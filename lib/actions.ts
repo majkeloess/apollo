@@ -16,7 +16,7 @@ import {
 export async function createWorkout(note: string, id: string) {
   try {
     const createdWorkout = await prisma.workout.create({
-      data: { workoutNote: note, createdBy: id },
+      data: { workoutNote: note, createdBy: id, workoutLoad: 0 },
     });
 
     return createdWorkout.workoutId;
@@ -41,7 +41,7 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
   const setsArr = [];
   const weightsArr = [];
   const repetitionsArr = [];
-
+  let load = 0;
   for (let i = 0; i < exerKeyArr.length; i++) {
     const repsExer = [];
     const weightsExer = [];
@@ -53,8 +53,11 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
     for (let set = 0; set < setsKeyArr.length; set++) {
       repsExer.push(Number(formData.get(`${i + 1}reps${set + 1}`)));
       weightsExer.push(Number(formData.get(`${i + 1}weight${set + 1}`)));
+      load +=
+        Number(formData.get(`${i + 1}reps${set + 1}`)) *
+        Number(formData.get(`${i + 1}weight${set + 1}`));
     }
-
+    console.log(load);
     exerciseIdArr.push(formData.get(`exercise${i + 1}`));
     setsArr.push(setsKeyArr.length);
     weightsArr.push(weightsExer);
@@ -67,6 +70,15 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
   const repsValid = RepsSchema.parse(repetitionsArr);
 
   try {
+    await prisma.workout.update({
+      where: {
+        workoutId: workoutId,
+      },
+      data: {
+        workoutLoad: load,
+      },
+    });
+
     for (let i = 0; i < exerKeyArr.length; i++) {
       await prisma.workoutDetails.create({
         data: {

@@ -83,7 +83,7 @@ export async function deleteData() {
   await prisma.workoutDetails.deleteMany();
   await prisma.workout.deleteMany();
   //await prisma.music.deleteMany();
-  await prisma.articles.deleteMany();
+  //await prisma.articles.deleteMany();
 }
 
 export async function fetchCountUserWorkouts(id: string) {

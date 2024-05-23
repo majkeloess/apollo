@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import FeedCard from "./FeedCard";
 import { fetchWorkouts } from "@/lib/fetch";
@@ -21,6 +20,7 @@ export default async function Feed() {
               workoutId={workout.workoutId}
               createdAt={workout.createdAt.toString().split("G")[0]}
               createdBy={workout.createdBy}
+              workoutLoad={workout.workoutLoad}
               key={workout.workoutId}
             />
           ))}

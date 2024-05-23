@@ -119,6 +119,7 @@ model Workout {
   workoutNote String
   createdAt DateTime @default(now())
   createdBy String
+  workoutLoad Float
   creator User @relation(fields: [createdBy], references: [id])
   workoutDetails WorkoutDetails[]
 }

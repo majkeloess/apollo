@@ -118,6 +118,7 @@ const WorkoutsDataSchema = z.array(
     workoutNote: z.string(),
     createdAt: z.date(),
     createdBy: z.string(),
+    workoutLoad: z.number(),
   })
 );
 const MusicDataSchema = z.array(

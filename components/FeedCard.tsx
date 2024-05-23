@@ -20,11 +20,13 @@ export default async function FeedCard({
   workoutNote,
   createdAt,
   createdBy,
+  workoutLoad,
 }: {
   workoutId: string;
   workoutNote: string;
   createdAt: string;
   createdBy: string;
+  workoutLoad: number;
 }) {
   const userData = await fetchUserData(createdBy);
   return (
@@ -42,7 +44,10 @@ export default async function FeedCard({
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-lg font-medium">{workoutNote}</p>
+          <div className="flex flex-row justify-between w-full">
+            <p className="text-lg font-medium">{workoutNote}</p>
+            <p className="text-lg font-medium ">{workoutLoad.toString()} kg</p>
+          </div>
 
           <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div>
 

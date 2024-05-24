@@ -34,7 +34,7 @@ export default function HeroSectionRemastered() {
             <div className="flex flex-row w-full">
               <MainCard imageUrl="/musicc.png" typeText="smarter you" />
               <MainCard imageUrl="/strength.png" typeText="stronger you" />
-              <MainCard imageUrl="/endurance.png" typeText="organized you" />
+              <MainCard imageUrl="/endurance.png" typeText="healthier you" />
             </div>
           </MotionDiv>
           <MotionDiv

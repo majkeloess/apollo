@@ -130,15 +130,15 @@
 
 
 const { PrismaClient } = require('@prisma/client');
-const { exercises, articles, playlists } = require("../lib/data.js");
+const { exercises, articles, playlists, newExer } = require("../lib/data.js");
 
 const prisma = new PrismaClient();
 
 async function seed() {
   try {
-    await prisma.articles.createMany({ data: articles });
-    //await prisma.exercises.createMany({ data: exercises });
-    await prisma.music.createMany({ data: playlists });
+    // await prisma.articles.createMany({ data: articles });
+    //await prisma.exercises.createMany({ data: newExer });
+    // await prisma.music.createMany({ data: playlists });
 
 
   } catch (error) {

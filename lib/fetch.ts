@@ -11,7 +11,11 @@ import {
 
 export async function fetchExercises() {
   unstable_noStore();
-  const exerciseData = await prisma.exercises.findMany();
+  const exerciseData = await prisma.exercises.findMany({
+    orderBy: {
+      exerciseName: "asc",
+    },
+  });
 
   return exerciseData;
 }
@@ -76,14 +80,6 @@ export async function fetchWorkoutDetails(workoutId: string) {
   });
 
   return workoutDetailsData;
-}
-
-export async function deleteData() {
-  unstable_noStore();
-  await prisma.workoutDetails.deleteMany();
-  await prisma.workout.deleteMany();
-  //await prisma.music.deleteMany();
-  //await prisma.articles.deleteMany();
 }
 
 export async function fetchCountUserWorkouts(id: string) {

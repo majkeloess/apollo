@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "./ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { IconBolt, IconMessage, IconShare } from "@tabler/icons-react";
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { IconBolt, IconMessage } from "@tabler/icons-react";
 import { fetchUserData } from "@/lib/fetch";
 import WorkoutTable from "./WorkoutTable";
 import Link from "next/link";

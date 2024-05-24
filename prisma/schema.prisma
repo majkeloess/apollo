@@ -13,7 +13,7 @@ datasource db {
  
 model User {
   id            String          @id @default(cuid())
-  name          String?
+  name          String
   nickname      String?
   email         String          @unique
   emailVerified DateTime?
@@ -23,6 +23,11 @@ model User {
   music Music[]
   articles Articles[]
   workouts Workout[]
+  likes Like[]
+  comments Comment[]
+  following Follow[] @relation(name: "following")
+  followers Follow[] @relation(name: "follower")
+
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
@@ -56,10 +61,10 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
  
 model VerificationToken {
@@ -93,6 +98,7 @@ model Music {
   genre String
   createdAt DateTime @default(now())
   createdBy String
+  
   creator User @relation(fields: [createdBy], references: [id])
 
 }
@@ -104,13 +110,17 @@ model Articles {
   note String
   createdAt DateTime @default(now())
   createdBy String
+  
   creator User @relation(fields: [createdBy], references: [id] )
 }
+
+//exercise part
 
 model Exercises {
   exerciseId String  @id @default(cuid())
   exerciseName String
   muscleGroup String
+  
   workoutDetails WorkoutDetails[]
 }
 
@@ -120,18 +130,55 @@ model Workout {
   createdAt DateTime @default(now())
   createdBy String
   workoutLoad Float
+  
   creator User @relation(fields: [createdBy], references: [id])
   workoutDetails WorkoutDetails[]
+  likes Like[]
+  comments Comment[]
 }
 
 model WorkoutDetails {
-  workoutDetailsId String @id @default(cuid())
-  workoutId String
-  workout Workout @relation(fields: [workoutId], references: [workoutId])
-  exerciseId String
-  exercise Exercises @relation(fields: [exerciseId], references: [exerciseId])
-  sets              Int
-  repetitions       Int[]
-  weights           Float[]
+  workoutDetailsId     String @id @default(cuid())
+  workoutId            String
+  exerciseId           String
+  sets                 Int
+  repetitions          Int[]
+  weights              Float[]
 
+  workout              Workout @relation(fields: [workoutId], references: [workoutId])
+  exercise             Exercises @relation(fields: [exerciseId], references: [exerciseId])
+}
+
+//social part
+
+model Like {
+  likeId      String @id @default(cuid())
+  workoutId   String
+  createdAt   DateTime @default(now())
+  createdBy   String
+  
+  user        User @relation(fields: [createdBy], references: [id])
+  workout     Workout @relation(fields: [workoutId], references: [workoutId])
+}
+
+model Comment {
+  commentId       String @id @default(cuid())
+  workoutId       String
+  createdAt       DateTime @default(now())
+  createdBy       String
+  commentContent  String 
+
+  user            User @relation(fields: [createdBy], references: [id])
+  workout         Workout @relation(fields: [workoutId], references: [workoutId])
+
+}
+
+model Follow {
+  followId String @id @default(cuid())
+  followerId String
+  followingId String 
+  createdAt DateTime @default(now())
+
+  follower User @relation(name: "follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation(name: "following", fields: [followingId], references: [id], onDelete: Cascade)
 }

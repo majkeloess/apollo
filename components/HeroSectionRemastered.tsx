@@ -72,9 +72,9 @@ export default function HeroSectionRemastered() {
               <Image
                 src="/card1.png"
                 alt="her"
-                width={252}
-                height={520}
-                className="rounded-[32px] object-cover"
+                width={250}
+                height={482}
+                className="rounded-[32px]"
               />
             </div>
           </div>

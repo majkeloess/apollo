@@ -13,6 +13,9 @@ import { fetchUserByWorkout, fetchUserData } from "@/lib/fetch";
 import { IconEdit, IconEraser } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
+import { deleteWorkout } from "@/lib/delete";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default async function ({ params }: { params: { workoutId: string } }) {
   const sessionPre = auth();
@@ -65,13 +68,20 @@ export default async function ({ params }: { params: { workoutId: string } }) {
       </div>
       <div className="flex flex-col items-center justify-center lg:w-[600px] mx-10 lg:m-0">
         <WorkoutTable workoutId={params.workoutId} />
+        <p className="w-full my-10 text-center text-xl">
+          Workout total load:{" "}
+          <span className="bg-gradient-to-tl text-2xl font-bold from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+            {workoutData.workoutLoad}
+          </span>{" "}
+          kg
+        </p>
         <div>
           {session == null && (
-            <Card className="mt-6 mb-8">
+            <Card className="mb-8">
               <CardHeader>
                 <CardTitle>New to Apollo?</CardTitle>
                 <CardDescription>
-                  Join our community and become unstopabble.
+                  Join our community and become unstoppable.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex justify-center">
@@ -82,7 +92,7 @@ export default async function ({ params }: { params: { workoutId: string } }) {
         </div>
         <div>
           {session != null && (
-            <Card className="mt-6 mb-8 mx-2">
+            <Card className="mb-8 mx-2">
               <div className="flex flex-row items-center">
                 <CardHeader>
                   <CardTitle>Problems with workout?</CardTitle>
@@ -91,11 +101,20 @@ export default async function ({ params }: { params: { workoutId: string } }) {
                   </CardDescription>
                 </CardHeader>
                 <div className="flex flex-col gap-4 mx-6 my-6">
+                  {/* <Link href={`/workout/${params.workoutId}/edit`}>  */}
                   <Button>
                     <IconEdit />
                   </Button>
+                  {/* </Link>  zrobię to raczej modalem już*/}
                   <Button>
-                    <IconEraser />
+                    <IconEraser
+                      onClick={async () => {
+                        "use server";
+                        await deleteWorkout(params.workoutId);
+                        revalidatePath("/dashboard");
+                        redirect("/dashboard");
+                      }}
+                    />
                   </Button>
                 </div>
               </div>

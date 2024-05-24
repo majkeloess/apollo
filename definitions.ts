@@ -110,6 +110,7 @@ const OneWorkoutDataSchema = z.object({
   workoutNote: z.string(),
   createdAt: z.date(),
   createdBy: z.string(),
+  workoutLoad: z.number(),
 });
 
 const WorkoutsDataSchema = z.array(

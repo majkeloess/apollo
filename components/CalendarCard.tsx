@@ -18,7 +18,7 @@ export default function CalendarCard({
   name: string;
 }) {
   return (
-    <div className="w-[350px] lg:w-[600px]">
+    <div className="w-[350px] md:w-[600px]">
       <Card>
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">

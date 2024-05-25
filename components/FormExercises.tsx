@@ -36,7 +36,7 @@ export default function FormExercises({
         </div>
       </div>
       <div className="flex justify-end mt-6">
-        <Button>Add </Button>
+        <Button>Add</Button>
       </div>
     </form>
   );

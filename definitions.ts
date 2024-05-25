@@ -133,6 +133,12 @@ const MusicDataSchema = z.array(
   })
 );
 
+const CommentDataSchema = z.object({
+  workoutId: z.string(),
+  createdBy: z.string(),
+  commentContent: z.string(),
+});
+
 export {
   SessionUserSchema,
   UserDataSchema,
@@ -149,4 +155,5 @@ export {
   ExerciseFormSchema,
   ArticleFormSchema,
   OneWorkoutDataSchema,
+  CommentDataSchema,
 };

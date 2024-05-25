@@ -7,14 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "./ui/avatar";
-import { IconBolt, IconMessage } from "@tabler/icons-react";
 import { fetchUserData } from "@/lib/fetch";
 import WorkoutTable from "./WorkoutTable";
 import Link from "next/link";
-import CopyButton from "./CopyButton";
-
+import FooterCardSection from "./FooterCardSection";
 export default async function FeedCard({
   workoutId,
   workoutNote,
@@ -53,22 +50,8 @@ export default async function FeedCard({
 
           <WorkoutTable workoutId={workoutId} />
         </CardContent>
-        <CardFooter>
-          <ul className="flex flex-row w-full justify-center gap-4">
-            <li className="w-1/3">
-              <Button className="w-full" variant="outline">
-                <IconBolt />
-              </Button>
-            </li>
-            <li className="w-1/3">
-              <Button className="w-full" variant="outline">
-                <IconMessage />
-              </Button>
-            </li>
-            <li className="w-1/3">
-              <CopyButton link={`localhost:3000/workout/${workoutId}`} />
-            </li>
-          </ul>
+        <CardFooter className="flex flex-col">
+          <FooterCardSection workoutId={workoutId} />
         </CardFooter>
       </Card>
     </div>

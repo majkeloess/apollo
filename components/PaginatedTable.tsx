@@ -42,16 +42,7 @@ export function PaginatedTable({
   return (
     <>
       {currentData && (
-        <div className="flex flex-row items-center gap-1">
-          {maxPages > 1 && currentPage != 1 && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setCurrentPage((page) => page - 1)}
-            >
-              <ChevronLeftIcon width={30} height={30} />
-            </Button>
-          )}
+        <div className="flex flex-col justify-center items-center gap-1">
           <Table>
             <TableBody>
               {type == "workouts" &&
@@ -75,15 +66,26 @@ export function PaginatedTable({
                   ))}
             </TableBody>
           </Table>
-          {currentPage < maxPages && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setCurrentPage((page) => page + 1)}
-            >
-              <ChevronRightIcon width={30} height={30} />
-            </Button>
-          )}
+          <div className="flex flex-row">
+            {maxPages > 1 && currentPage != 1 && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setCurrentPage((page) => page - 1)}
+              >
+                <ChevronLeftIcon width={30} height={30} />
+              </Button>
+            )}
+            {currentPage < maxPages && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setCurrentPage((page) => page + 1)}
+              >
+                <ChevronRightIcon width={30} height={30} />
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </>

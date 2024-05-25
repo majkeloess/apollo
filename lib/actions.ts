@@ -11,6 +11,7 @@ import {
   PlaylistFormSchema,
   ExerciseFormSchema,
   ArticleFormSchema,
+  CommentDataSchema,
 } from "@/definitions";
 
 export async function createWorkout(note: string, id: string) {
@@ -170,4 +171,30 @@ export async function createArticle(id: string, formData: FormData) {
   }
   revalidatePath("/dashboard/wisdom");
   redirect("/dashboard/wisdom");
+}
+
+export async function createComment(
+  id: string,
+  workId: string,
+  formData: FormData
+) {
+  const { workoutId, createdBy, commentContent } = CommentDataSchema.parse({
+    workoutId: workId,
+    createdBy: id,
+    commentContent: formData.get("comment"),
+  });
+
+  try {
+    await prisma.comment.create({
+      data: {
+        workoutId: workoutId,
+        createdBy: createdBy,
+        commentContent: commentContent,
+      },
+    });
+  } catch (error) {
+    throw new Error("Error with creating comment!");
+  } finally {
+    await prisma.$disconnect();
+  }
 }

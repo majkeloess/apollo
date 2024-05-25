@@ -14,7 +14,7 @@ export function ProfileCard({
   const nameSplit = name.split(" ");
   return (
     <div className="w-full lg:w-[600px]">
-      <Card>
+      <Card className="h-[380px]">
         <CardHeader className="flex flex-col gap-2">
           <div className="flex flex-col gap-4">
             <CardTitle>

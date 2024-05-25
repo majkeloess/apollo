@@ -3,7 +3,6 @@ import { Articles, Music, Workout } from "@prisma/client";
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
-import Link from "next/link";
 import {
   StatedArticleRow,
   StatedMusicRow,

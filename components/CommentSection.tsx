@@ -3,8 +3,10 @@ import { Input } from "./ui/input";
 import { TableBody, Table, TableRow, TableCell } from "./ui/table";
 import { Button } from "./ui/button";
 import { IconPlus } from "@tabler/icons-react";
-
+import { createComment } from "@/lib/actions";
 export function CommentSection({ show }: { show: boolean }) {
+  //const bindedComment = createComment.bind()
+
   return (
     <div className="w-full my-2">
       {show && (

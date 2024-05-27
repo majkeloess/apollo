@@ -6,18 +6,18 @@ import { IconPlus } from "@tabler/icons-react";
 import { createComment } from "@/lib/actions";
 export function CommentSection({
   show,
-  id,
-  workoutId,
-}: {
+}: // id,
+// workoutId,
+{
   show: boolean;
-  id: string;
-  workoutId: string;
+  // id: string;
+  // workoutId: string;
 }) {
-  const data = {
-    id: id,
-    workoutId: workoutId,
-  };
-  const bindedComment = createComment.bind(null, data);
+  // const data = {
+  //   id: id,
+  //   workoutId: workoutId,
+  // };
+  //const bindedComment = createComment.bind(null, data);
 
   return (
     <div className="w-full my-2">

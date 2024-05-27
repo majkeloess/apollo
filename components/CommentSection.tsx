@@ -4,8 +4,20 @@ import { TableBody, Table, TableRow, TableCell } from "./ui/table";
 import { Button } from "./ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import { createComment } from "@/lib/actions";
-export function CommentSection({ show }: { show: boolean }) {
-  //const bindedComment = createComment.bind()
+export function CommentSection({
+  show,
+  id,
+  workoutId,
+}: {
+  show: boolean;
+  id: string;
+  workoutId: string;
+}) {
+  const data = {
+    id: id,
+    workoutId: workoutId,
+  };
+  const bindedComment = createComment.bind(null, data);
 
   return (
     <div className="w-full my-2">

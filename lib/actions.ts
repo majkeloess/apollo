@@ -174,13 +174,12 @@ export async function createArticle(id: string, formData: FormData) {
 }
 
 export async function createComment(
-  id: string,
-  workId: string,
+  data: { id: string; workoutId: string },
   formData: FormData
 ) {
   const { workoutId, createdBy, commentContent } = CommentDataSchema.parse({
-    workoutId: workId,
-    createdBy: id,
+    workoutId: data.workoutId,
+    createdBy: data.id,
     commentContent: formData.get("comment"),
   });
 

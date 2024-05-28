@@ -1,8 +1,13 @@
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import FeedCard from "./FeedCard";
-import { fetchWorkouts } from "@/lib/fetch";
+import { fetchWorkouts, fetchIdFromSession } from "@/lib/fetch";
+import { auth } from "@/auth";
+import { SessionUserSchema } from "@/definitions";
 
 export default async function Feed() {
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const id = await fetchIdFromSession(name);
   const workoutData = await fetchWorkouts();
   return (
     <MotionDiv
@@ -22,6 +27,7 @@ export default async function Feed() {
               createdBy={workout.createdBy}
               workoutLoad={workout.workoutLoad}
               key={workout.workoutId}
+              id={id}
             />
           ))}
         </div>

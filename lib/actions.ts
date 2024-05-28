@@ -58,7 +58,6 @@ export async function createWorkoutDetails(id: string, formData: FormData) {
         Number(formData.get(`${i + 1}reps${set + 1}`)) *
         Number(formData.get(`${i + 1}weight${set + 1}`));
     }
-    console.log(load);
     exerciseIdArr.push(formData.get(`exercise${i + 1}`));
     setsArr.push(setsKeyArr.length);
     weightsArr.push(weightsExer);

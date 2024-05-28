@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 
 import { Avatar, AvatarImage } from "./ui/avatar";
-import { fetchUserData } from "@/lib/fetch";
+import { fetchComments, fetchUserData } from "@/lib/fetch";
 import WorkoutTable from "./WorkoutTable";
 import Link from "next/link";
 import FooterCardSection from "./FooterCardSection";
@@ -18,14 +18,17 @@ export default async function FeedCard({
   createdAt,
   createdBy,
   workoutLoad,
+  id,
 }: {
   workoutId: string;
   workoutNote: string;
   createdAt: string;
   createdBy: string;
   workoutLoad: number;
+  id: string;
 }) {
   const userData = await fetchUserData(createdBy);
+  const commentData = await fetchComments(workoutId);
   return (
     <div className="w-[350px] lg:w-[500px]">
       <Card>
@@ -51,7 +54,11 @@ export default async function FeedCard({
           <WorkoutTable workoutId={workoutId} />
         </CardContent>
         <CardFooter className="flex flex-col">
-          <FooterCardSection workoutId={workoutId} />
+          <FooterCardSection
+            workoutId={workoutId}
+            id={id}
+            commentData={commentData}
+          />
         </CardFooter>
       </Card>
     </div>

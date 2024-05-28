@@ -139,6 +139,16 @@ const CommentDataSchema = z.object({
   commentContent: z.string(),
 });
 
+const CommentFetchSchema = z.array(
+  z.object({
+    commentId: z.string(),
+    workoutId: z.string(),
+    createdAt: z.date(),
+    createdBy: z.string(),
+    commentContent: z.string(),
+  })
+);
+
 export {
   SessionUserSchema,
   UserDataSchema,
@@ -156,4 +166,5 @@ export {
   ArticleFormSchema,
   OneWorkoutDataSchema,
   CommentDataSchema,
+  CommentFetchSchema,
 };

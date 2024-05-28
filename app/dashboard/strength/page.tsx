@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/card";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { fetchExercises, fetchIdFromSession } from "@/lib/fetch";
+import { SessionUserSchema } from "@/definitions";
 import { Metadata } from "next";
 import FormExercises from "@/components/FormExercises";
 import { auth } from "@/auth";
-import { SessionUserSchema } from "@/definitions";
 import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";

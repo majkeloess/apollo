@@ -7,6 +7,7 @@ import {
   MusicDataSchema,
   WorkoutsDataSchema,
   OneWorkoutDataSchema,
+  CommentFetchSchema,
 } from "@/definitions";
 
 export async function fetchExercises() {
@@ -145,4 +146,15 @@ export async function fetchUserByWorkout(workoutId: string) {
   const validatedWorkoutData = OneWorkoutDataSchema.parse(workoutsData);
 
   return validatedWorkoutData;
+}
+
+export async function fetchComments(workoutId: string) {
+  const commentData = await prisma.comment.findMany({
+    where: {
+      workoutId: workoutId,
+    },
+  });
+
+  const validatedCommentData = CommentFetchSchema.parse(commentData);
+  return validatedCommentData;
 }

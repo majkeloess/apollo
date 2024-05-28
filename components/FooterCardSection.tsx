@@ -16,7 +16,7 @@ export default function FooterCardSection({
     <>
       <div className="flex flex-row justify-between w-full my-2">
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Paweł and 3 other people [like albo inny chuj]
+          Paweł and 3 other people liked
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">2 comments</p>
       </div>

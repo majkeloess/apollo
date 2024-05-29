@@ -75,6 +75,7 @@ export default function HeroSectionRemastered() {
                 width={250}
                 height={482}
                 className="rounded-[32px]"
+                priority
               />
             </div>
           </div>
@@ -86,6 +87,7 @@ export default function HeroSectionRemastered() {
                 width={252}
                 height={520}
                 className="rounded-[32px] object-cover"
+                priority
               />
             </div>
           </div>

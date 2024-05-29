@@ -149,6 +149,22 @@ const CommentFetchSchema = z.array(
   })
 );
 
+const LikeDataSchema = z.array(
+  z.object({
+    likeId: z.string(),
+    workoutId: z.string(),
+    createdAt: z.date(),
+    createdBy: z.string(),
+  })
+);
+
+const OneLikeDataSchema = z.object({
+  likeId: z.string(),
+  workoutId: z.string(),
+  createdAt: z.date(),
+  createdBy: z.string(),
+});
+
 export {
   SessionUserSchema,
   UserDataSchema,
@@ -167,4 +183,6 @@ export {
   OneWorkoutDataSchema,
   CommentDataSchema,
   CommentFetchSchema,
+  LikeDataSchema,
+  OneLikeDataSchema,
 };

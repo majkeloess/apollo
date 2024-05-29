@@ -1,5 +1,5 @@
 "use server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { redirect } from "next/navigation";
 import prisma from "./prisma";
 import {
@@ -192,6 +192,22 @@ export async function createComment(
     });
   } catch (error) {
     throw new Error("Error with creating comment!");
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+export async function createLike(workoutId: string, id: string) {
+  unstable_noStore();
+  try {
+    await prisma.like.create({
+      data: {
+        createdBy: id,
+        workoutId: workoutId,
+      },
+    });
+  } catch (error) {
+    throw new Error("Problem with like!");
   } finally {
     await prisma.$disconnect();
   }

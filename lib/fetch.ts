@@ -8,6 +8,7 @@ import {
   WorkoutsDataSchema,
   OneWorkoutDataSchema,
   CommentFetchSchema,
+  LikeDataSchema,
 } from "@/definitions";
 
 export async function fetchExercises() {
@@ -149,6 +150,7 @@ export async function fetchUserByWorkout(workoutId: string) {
 }
 
 export async function fetchComments(workoutId: string) {
+  unstable_noStore();
   const commentData = await prisma.comment.findMany({
     where: {
       workoutId: workoutId,
@@ -157,4 +159,17 @@ export async function fetchComments(workoutId: string) {
 
   const validatedCommentData = CommentFetchSchema.parse(commentData);
   return validatedCommentData;
+}
+
+export async function fetchLikes(workoutId: string) {
+  unstable_noStore();
+  const likeData = await prisma.like.findMany({
+    where: {
+      workoutId: workoutId,
+    },
+  });
+
+  const validatedLikeData = LikeDataSchema.parse(likeData);
+
+  return validatedLikeData;
 }

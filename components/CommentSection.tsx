@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarImage } from "./ui/avatar";
 import { Input } from "./ui/input";
 import { TableBody, Table, TableRow, TableCell } from "./ui/table";
 import { Button } from "./ui/button";

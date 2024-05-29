@@ -36,3 +36,23 @@ export async function deleteWorkout(workoutId: string) {
     },
   });
 }
+
+export async function deleteLike(workoutId: string, id: string) {
+  unstable_noStore();
+  const like = await prisma.like.findFirst({
+    where: {
+      createdBy: id,
+      workoutId: workoutId,
+    },
+  });
+
+  if (like) {
+    await prisma.like.delete({
+      where: {
+        likeId: like.likeId,
+      },
+    });
+  } else {
+    throw new Error("Like not found");
+  }
+}

@@ -173,3 +173,10 @@ export async function fetchLikes(workoutId: string) {
 
   return validatedLikeData;
 }
+
+export async function fetchUsers() {
+  unstable_noStore;
+  const userData = await prisma.user.findMany();
+
+  return userData;
+}

@@ -1,7 +1,7 @@
 import { MotionDiv } from "./ui/MotionDiv";
 import animations from "@/lib/animations";
 import { Button } from "./ui/button";
-import { IconBarbell } from "@tabler/icons-react";
+import { IconBarbell, IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function MenuDashboard() {
@@ -14,10 +14,15 @@ export default function MenuDashboard() {
       whileInView="show"
     >
       <ul className="flex flex-row justify-evenly m-5">
-        <li>
+        <li className="flex flex-row gap-4">
           <Link href="/dashboard/strength">
             <Button variant="secondary">
               <IconBarbell />
+            </Button>
+          </Link>
+          <Link href="/dashboard/explore">
+            <Button variant="secondary">
+              <IconSearch />
             </Button>
           </Link>
         </li>

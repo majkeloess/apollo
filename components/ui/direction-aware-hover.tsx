@@ -94,7 +94,6 @@ export const DirectionAwareHover = ({
               width="1000"
               height="1000"
               src={imageUrl}
-              priority
             />
           </motion.div>
           <motion.div

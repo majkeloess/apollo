@@ -25,9 +25,11 @@ function isMusic(item: any): item is Music {
 export function PaginatedTable({
   data,
   type,
+  owner,
 }: {
   data?: Workout[] | Articles[] | Music[];
   type: string;
+  owner: boolean;
 }) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const dataPerPage = 5;
@@ -56,13 +58,13 @@ export function PaginatedTable({
                 currentData
                   .filter(isArticle)
                   .map((data, index) => (
-                    <StatedArticleRow index={index} data={data} />
+                    <StatedArticleRow index={index} data={data} owner={owner} />
                   ))}
               {type == "music" &&
                 currentData
                   .filter(isMusic)
                   .map((data, index) => (
-                    <StatedMusicRow index={index} data={data} />
+                    <StatedMusicRow index={index} data={data} owner={owner} />
                   ))}
             </TableBody>
           </Table>

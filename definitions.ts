@@ -85,7 +85,7 @@ const UserDataSchema = z.object({
   //nickname: z.string(),
   email: z.string(),
   //emailVerified: z.date(),
-  image: z.string(),
+  image: z.union([z.string(), z.null()]),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -158,6 +158,22 @@ const LikeDataSchema = z.array(
   })
 );
 
+const FollowDataSchema = z.array(
+  z.object({
+    followId: z.string(),
+    followerId: z.string(),
+    followingId: z.string(),
+    createdAt: z.date(),
+  })
+);
+
+const OneFollowDataSchema = z.object({
+  followId: z.string(),
+  followerId: z.string(),
+  followingId: z.string(),
+  createdAt: z.date(),
+});
+
 const OneLikeDataSchema = z.object({
   likeId: z.string(),
   workoutId: z.string(),
@@ -185,4 +201,6 @@ export {
   CommentFetchSchema,
   LikeDataSchema,
   OneLikeDataSchema,
+  OneFollowDataSchema,
+  FollowDataSchema,
 };

@@ -36,3 +36,7 @@ export function filterDatesByCurrentWeek(dates: Date[]) {
     return date >= startOfWeek && date <= endOfWeek;
   });
 }
+
+export function isOwner(idFromSession: string, idOfCurrentPage: string) {
+  return idFromSession == idOfCurrentPage;
+}

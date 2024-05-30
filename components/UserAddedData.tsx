@@ -6,10 +6,12 @@ export function ProfileCard({
   name,
   data,
   type,
+  owner,
 }: {
   name: string;
   data?: Workout[] | Articles[] | Music[];
   type: string;
+  owner: boolean;
 }) {
   const nameSplit = name.split(" ");
   return (
@@ -23,7 +25,7 @@ export function ProfileCard({
           </div>
         </CardHeader>
         <CardContent className="my-2 ">
-          <PaginatedTable data={data} type={type} />
+          <PaginatedTable data={data} type={type} owner={owner} />
         </CardContent>
       </Card>
     </div>

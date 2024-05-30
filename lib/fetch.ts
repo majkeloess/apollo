@@ -9,6 +9,7 @@ import {
   OneWorkoutDataSchema,
   CommentFetchSchema,
   LikeDataSchema,
+  FollowDataSchema,
 } from "@/definitions";
 
 export async function fetchExercises() {
@@ -179,4 +180,26 @@ export async function fetchUsers() {
   const userData = await prisma.user.findMany();
 
   return userData;
+}
+
+export async function fetchFollowers(id: string) {
+  unstable_noStore();
+  const followData = await prisma.follow.findMany({
+    where: {
+      followingId: id,
+    },
+  });
+  const validatedFollowData = FollowDataSchema.parse(followData);
+  return validatedFollowData;
+}
+
+export async function fetchFollowing(id: string) {
+  unstable_noStore();
+  const followData = await prisma.follow.findMany({
+    where: {
+      followerId: id,
+    },
+  });
+  const validatedFollowData = FollowDataSchema.parse(followData);
+  return validatedFollowData;
 }

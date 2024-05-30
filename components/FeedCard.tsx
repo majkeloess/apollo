@@ -36,7 +36,9 @@ export default async function FeedCard({
         <CardHeader className="flex flex-row gap-3 items-center">
           <Link href={`/dashboard/profile/${userData.id}`}>
             <Avatar>
-              <AvatarImage src={userData.image} />
+              <AvatarImage
+                src={userData.image ? userData.image : "/A_logo.png"}
+              />
             </Avatar>
           </Link>
           <div className="flex flex-col gap-1">

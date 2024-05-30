@@ -9,9 +9,11 @@ import { Articles, Music, Workout } from "@prisma/client";
 export function StatedArticleRow({
   index,
   data,
+  owner,
 }: {
   index: number;
   data: Articles;
+  owner: boolean;
 }) {
   const [showRow, setShowRow] = useState<boolean>(true);
   return (
@@ -29,15 +31,17 @@ export function StatedArticleRow({
                 <IconLink size={24} />
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setShowRow(!showRow);
-              }}
-            >
-              <IconEraser size={24} />
-            </Button>
+            {owner && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setShowRow(!showRow);
+                }}
+              >
+                <IconEraser size={24} />
+              </Button>
+            )}
           </TableCell>
         </TableRow>
       )}
@@ -48,9 +52,11 @@ export function StatedArticleRow({
 export function StatedMusicRow({
   index,
   data,
+  owner,
 }: {
   index: number;
   data: Music;
+  owner: boolean;
 }) {
   const [showRow, setShowRow] = useState<boolean>(true);
   return (
@@ -69,15 +75,17 @@ export function StatedMusicRow({
                 <IconLink size={24} />
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setShowRow(!showRow);
-              }}
-            >
-              <IconEraser size={24} />
-            </Button>
+            {owner && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setShowRow(!showRow);
+                }}
+              >
+                <IconEraser size={24} />
+              </Button>
+            )}
           </TableCell>
         </TableRow>
       )}

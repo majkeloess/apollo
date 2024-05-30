@@ -6,21 +6,45 @@ import {
   fetchUserData,
   fetchUserWorkouts,
   fetchUserMusic,
+  fetchFollowers,
+  fetchFollowing,
+  fetchIdFromSession,
 } from "@/lib/fetch";
 import CalendarCard from "./CalendarCard";
+import FollowButton from "./FollowButton";
+import { auth } from "@/auth";
+import { SessionUserSchema } from "@/definitions";
+import { isOwner } from "@/lib/utils";
 
 export default async function ProfilePage({ id }: { id: string }) {
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const idSession = await fetchIdFromSession(name);
+
+  //check whether it's owner
+  const owner = isOwner(idSession, id);
+
+  const followersDataPre = fetchFollowers(id);
+  const followingDataPre = fetchFollowing(id);
   const profileDataPre = fetchUserData(id);
   const articlesDataPre = fetchUserArticles(id);
   const musicDataPre = fetchUserMusic(id);
   const workoutsDataPre = fetchUserWorkouts(id);
-  const [profileData, articlesData, musicData, workoutsData] =
-    await Promise.all([
-      profileDataPre,
-      articlesDataPre,
-      musicDataPre,
-      workoutsDataPre,
-    ]);
+  const [
+    profileData,
+    articlesData,
+    musicData,
+    workoutsData,
+    followersData,
+    followingData,
+  ] = await Promise.all([
+    profileDataPre,
+    articlesDataPre,
+    musicDataPre,
+    workoutsDataPre,
+    followersDataPre,
+    followingDataPre,
+  ]);
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -32,16 +56,22 @@ export default async function ProfilePage({ id }: { id: string }) {
       <div className="mt-28 flex flex-col justify-center">
         <div className="flex flex-row w-full gap-6 items-center justify-center">
           <Avatar className="w-[80px] h-[80px]">
-            <AvatarImage src={profileData.image} alt="profile image" />
+            <AvatarImage
+              src={profileData.image ? profileData.image : "/A_logo.png"}
+              alt="profile image"
+            />
           </Avatar>
 
-          <div>
-            <h1 className="text-2xl font-medium">
-              <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-                {profileData.name}
-              </span>
-            </h1>
-            <p>{profileData.createdAt.toDateString()}</p>
+          <div className="flex flex-col gap-5">
+            <div>
+              <p className="text-2xl font-medium">
+                <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+                  {profileData.name}
+                </span>
+              </p>
+              <p>{profileData.createdAt.toDateString()}</p>
+            </div>
+            {!owner && <FollowButton />}
           </div>
         </div>
         <div className="flex flex-row gap-10 justify-center mt-8">
@@ -57,13 +87,17 @@ export default async function ProfilePage({ id }: { id: string }) {
             <li className="dark:text-gray-400 text-gray-500 text-md">
               Followers
             </li>
-            <li className="font-bold text-md text-end">27</li>
+            <li className="font-bold text-md text-end">
+              {followersData.length}
+            </li>
           </ul>
           <ul>
             <li className="dark:text-gray-400 text-gray-500 text-md">
               Following
             </li>
-            <li className="font-bold text-md text-end">24</li>
+            <li className="font-bold text-md text-end">
+              {followingData.length}
+            </li>
           </ul>
         </div>
         {/* <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div> */}
@@ -74,13 +108,20 @@ export default async function ProfilePage({ id }: { id: string }) {
             name={profileData.name}
             data={workoutsData}
             type="workouts"
+            owner={owner}
           />
           <ProfileCard
             name={profileData.name}
             data={articlesData}
             type="articles"
+            owner={owner}
           />
-          <ProfileCard name={profileData.name} data={musicData} type="music" />
+          <ProfileCard
+            name={profileData.name}
+            data={musicData}
+            type="music"
+            owner={owner}
+          />
         </div>
       </div>
     </MotionDiv>

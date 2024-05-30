@@ -5,8 +5,6 @@ import { CommentSection } from "./CommentSection";
 import Link from "next/link";
 import { useState } from "react";
 import { Comment, Like } from "@prisma/client";
-import { createLike } from "@/lib/actions";
-import { deleteLike } from "@/lib/delete";
 
 export default function FooterCardSection({
   workoutId,
@@ -20,25 +18,6 @@ export default function FooterCardSection({
   likesData: Like[];
 }) {
   const [show, setShow] = useState<boolean>(false);
-  const [liked, setLiked] = useState<boolean>(
-    likesData.some(
-      (like) => like.createdBy === id && like.workoutId === workoutId
-    )
-  );
-
-  async function handleLikeClick() {
-    try {
-      if (liked) {
-        await deleteLike(workoutId, id);
-        setLiked(false);
-      } else {
-        await createLike(workoutId, id);
-        setLiked(true);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
 
   return (
     <>
@@ -49,16 +28,10 @@ export default function FooterCardSection({
       </div>
       <ul className="flex flex-row w-full justify-center gap-4">
         <li className="w-1/3">
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={handleLikeClick}
-          >
+          <Button className="w-full" variant="outline">
             <div className="flex flex-row items-center">
-              <p className="text-xl font-medium">
-                {liked ? likesData.length + 1 : likesData.length}
-              </p>
-              <IconBolt className={liked ? "bg-gray-500" : ""} />
+              <p className="text-xl font-medium">0</p>
+              <IconBolt />
             </div>
           </Button>
         </li>

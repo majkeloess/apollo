@@ -9,22 +9,33 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { fetchUserByWorkout, fetchUserData } from "@/lib/fetch";
+import {
+  fetchUserByWorkout,
+  fetchUserData,
+  fetchIdFromSession,
+} from "@/lib/fetch";
 import { IconEdit, IconEraser } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import { deleteWorkout } from "@/lib/delete";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isOwner } from "@/lib/utils";
+import { SessionUserSchema } from "@/definitions";
 
 export default async function ({ params }: { params: { workoutId: string } }) {
   const sessionPre = auth();
+
   const workoutDataPre = fetchUserByWorkout(params.workoutId);
   const [session, workoutData] = await Promise.all([
     sessionPre,
     workoutDataPre,
   ]);
   const userData = await fetchUserData(workoutData.createdBy);
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const idSession = await fetchIdFromSession(name);
+
+  const owner = isOwner(idSession, workoutData.createdBy);
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -47,7 +58,7 @@ export default async function ({ params }: { params: { workoutId: string } }) {
         <div className="flex flex-row items-center gap-4">
           <Link href={`/dashboard/profile/${userData.id}`}>
             <Image
-              src={userData.image}
+              src={userData.image ? userData.image : "/A_logo.png"}
               width={60}
               height={60}
               alt="profile-image"
@@ -91,7 +102,7 @@ export default async function ({ params }: { params: { workoutId: string } }) {
           )}
         </div>
         <div>
-          {session != null && (
+          {session != null && owner && (
             <Card className="mb-8 mx-2">
               <div className="flex flex-row items-center">
                 <CardHeader>

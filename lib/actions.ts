@@ -212,3 +212,19 @@ export async function createLike(workoutId: string, id: string) {
     await prisma.$disconnect();
   }
 }
+
+export async function followAction(followerId: string, followingId: string) {
+  // const newFollow = await prisma.follow.create({
+  //   data: {
+  //     followerId: "10", // ID zalogowanego użytkownika
+  //     followingId: "3", // ID użytkownika, który ma być obserwowany
+  //   },
+  // });\
+
+  const isExistingFollow = await prisma.follow.findFirst({
+    where: {
+      followerId: followerId,
+      followingId: followingId,
+    },
+  });
+}

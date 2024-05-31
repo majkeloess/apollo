@@ -15,7 +15,7 @@ export default async function ExploreCard({
   idSession: string;
 }) {
   return (
-    <Card className="hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
+    <Card className=" hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950  ">
       <CardContent className="flex flex-col justify-center items-center gap-4 mt-6">
         <p className="font-bold text-xl text-center">{name}</p>
         <div className="flex flex-row justify-center items-center gap-4">

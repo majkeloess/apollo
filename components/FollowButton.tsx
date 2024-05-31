@@ -1,6 +1,6 @@
 import { Follow } from "@prisma/client";
-import { Button } from "./ui/button";
 import { followAction } from "@/lib/actions";
+import { Followed, Unfollowed } from "./Toast";
 
 export default function FollowButton({
   follow,
@@ -18,9 +18,7 @@ export default function FollowButton({
         await followAction(idSession, id);
       }}
     >
-      <Button className="font-bold w-full" variant="outline">
-        {!follow ? "Follow" : "Unfollow"}
-      </Button>
+      {!follow ? <Followed /> : <Unfollowed />}
     </form>
   );
 }

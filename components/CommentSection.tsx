@@ -1,8 +1,7 @@
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Input } from "./ui/input";
 import { TableBody, Table, TableRow, TableCell } from "./ui/table";
-import { Button } from "./ui/button";
-import { IconPlus } from "@tabler/icons-react";
+import { Commented } from "./Toast";
 import { createComment } from "@/lib/actions";
 import { Comment } from "@prisma/client";
 import Link from "next/link";
@@ -57,9 +56,7 @@ export function CommentSection({
                 id="comment"
                 name="comment"
               />
-              <Button variant="ghost" size="icon">
-                <IconPlus />
-              </Button>
+              <Commented />
             </div>
           </form>
         </>

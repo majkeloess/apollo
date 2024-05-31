@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import WisdomGenerator from "@/components/WisdomGenerator";
 import WisdomSkeleton from "@/components/skeletons/WisdomSkeleton";
+import { Added } from "@/components/Toast";
 
 export const metadata: Metadata = {
   title: "Wisdom",
@@ -28,9 +29,7 @@ export default function WisdomPage() {
             </span>
           </div>
           <Link href="/dashboard/wisdom/create">
-            <Button variant="outline">
-              <IconPlus />
-            </Button>
+            <Added />
           </Link>
         </div>
         <Suspense fallback={<WisdomSkeleton />}>

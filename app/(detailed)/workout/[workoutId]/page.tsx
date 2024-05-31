@@ -9,13 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { fetchUserByWorkout, fetchUserData } from "@/lib/fetch";
-import { IconEdit, IconEraser } from "@tabler/icons-react";
+import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import { deleteWorkout } from "@/lib/delete";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { getIdFromSession, isOwner } from "@/lib/utils";
+import { Erased } from "@/components/Toast";
 
 export default async function ({ params }: { params: { workoutId: string } }) {
   const workoutData = await fetchUserByWorkout(params.workoutId);
@@ -100,21 +99,17 @@ export default async function ({ params }: { params: { workoutId: string } }) {
                   </CardDescription>
                 </CardHeader>
                 <div className="flex flex-col gap-4 mx-6 my-6">
-                  {/* <Link href={`/workout/${params.workoutId}/edit`}>  */}
                   <Button>
                     <IconEdit />
                   </Button>
-                  {/* </Link>  zrobię to raczej modalem już*/}
-                  <Button>
-                    <IconEraser
-                      onClick={async () => {
-                        "use server";
-                        await deleteWorkout(params.workoutId);
-                        revalidatePath("/dashboard");
-                        redirect("/dashboard");
-                      }}
-                    />
-                  </Button>
+                  <form
+                    action={async () => {
+                      "use server";
+                      await deleteWorkout(params.workoutId);
+                    }}
+                  >
+                    <Erased />
+                  </form>
                 </div>
               </div>
             </Card>

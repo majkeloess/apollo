@@ -145,7 +145,7 @@ model WorkoutDetails {
   repetitions          Int[]
   weights              Float[]
 
-  workout              Workout @relation(fields: [workoutId], references: [workoutId])
+  workout              Workout @relation(fields: [workoutId], references: [workoutId], onDelete: Cascade)
   exercise             Exercises @relation(fields: [exerciseId], references: [exerciseId])
 }
 

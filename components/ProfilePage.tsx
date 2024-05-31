@@ -13,6 +13,7 @@ import CalendarCard from "./CalendarCard";
 import FollowButton from "./FollowButton";
 
 import { getIdFromSession, isFollowing, isOwner } from "@/lib/utils";
+import MusicCard from "./MusicCard";
 
 export default async function ProfilePage({ id }: { id: string }) {
   const idSession = await getIdFromSession();
@@ -103,24 +104,30 @@ export default async function ProfilePage({ id }: { id: string }) {
         <div className="mt-10 mx-8 flex flex-col justify-center gap-10 mb-28">
           <CalendarCard name={profileData.name} workouts={workoutsData} />
 
-          <ProfileCard
-            name={profileData.name}
-            data={workoutsData}
-            type="workouts"
-            owner={owner}
-          />
-          <ProfileCard
-            name={profileData.name}
-            data={articlesData}
-            type="articles"
-            owner={owner}
-          />
-          <ProfileCard
-            name={profileData.name}
-            data={musicData}
-            type="music"
-            owner={owner}
-          />
+          {workoutsData.length != 0 && (
+            <ProfileCard
+              name={profileData.name}
+              data={workoutsData}
+              type="workouts"
+              owner={owner}
+            />
+          )}
+          {articlesData.length != 0 && (
+            <ProfileCard
+              name={profileData.name}
+              data={articlesData}
+              type="articles"
+              owner={owner}
+            />
+          )}
+          {musicData.length != 0 && (
+            <ProfileCard
+              name={profileData.name}
+              data={musicData}
+              type="music"
+              owner={owner}
+            />
+          )}
         </div>
       </div>
     </MotionDiv>

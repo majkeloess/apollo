@@ -6,23 +6,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { MotionDiv } from "@/components/ui/MotionDiv";
-import { fetchExercises, fetchIdFromSession } from "@/lib/fetch";
-import { SessionUserSchema } from "@/definitions";
+import { fetchExercises } from "@/lib/fetch";
 import { Metadata } from "next";
 import FormExercises from "@/components/FormExercises";
-import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
+import { getIdFromSession } from "@/lib/utils";
+
 export const metadata: Metadata = {
   title: "Strength ",
 };
 
 export default async function StrengthPage() {
   const exercises = await fetchExercises();
-  const session = await auth();
-  const { image, email, name } = SessionUserSchema.parse(session?.user);
-  const id = await fetchIdFromSession(name);
+  const id = await getIdFromSession();
 
   return (
     <MotionDiv

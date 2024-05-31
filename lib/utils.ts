@@ -1,6 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import prisma from "./prisma";
+import { auth } from "@/auth";
+import { SessionUserSchema } from "@/definitions";
+import { fetchIdFromSession } from "./fetch";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -53,4 +56,12 @@ export async function isLiked(workoutId: string, id: string) {
     },
   });
   return isExistingLike;
+}
+
+export async function getIdFromSession() {
+  const session = await auth();
+  const { image, email, name } = SessionUserSchema.parse(session?.user);
+  const idSession = await fetchIdFromSession(name);
+
+  return idSession;
 }

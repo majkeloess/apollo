@@ -8,18 +8,14 @@ import {
   fetchUserMusic,
   fetchFollowers,
   fetchFollowing,
-  fetchIdFromSession,
 } from "@/lib/fetch";
 import CalendarCard from "./CalendarCard";
 import FollowButton from "./FollowButton";
-import { auth } from "@/auth";
-import { SessionUserSchema } from "@/definitions";
-import { isFollowing, isOwner } from "@/lib/utils";
+
+import { getIdFromSession, isFollowing, isOwner } from "@/lib/utils";
 
 export default async function ProfilePage({ id }: { id: string }) {
-  const session = await auth();
-  const { image, email, name } = SessionUserSchema.parse(session?.user);
-  const idSession = await fetchIdFromSession(name);
+  const idSession = await getIdFromSession();
 
   //check whether it's owner
   const owner = isOwner(idSession, id);

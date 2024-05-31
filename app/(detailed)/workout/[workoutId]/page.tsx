@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { SignIn } from "@/components/SignIn";
 import WorkoutTable from "@/components/WorkoutTable";
 import { Button } from "@/components/ui/button";
@@ -9,31 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  fetchUserByWorkout,
-  fetchUserData,
-  fetchIdFromSession,
-} from "@/lib/fetch";
+import { fetchUserByWorkout, fetchUserData } from "@/lib/fetch";
 import { IconEdit, IconEraser } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import { deleteWorkout } from "@/lib/delete";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { isOwner } from "@/lib/utils";
-import { SessionUserSchema } from "@/definitions";
+import { getIdFromSession, isOwner } from "@/lib/utils";
 
 export default async function ({ params }: { params: { workoutId: string } }) {
-  const sessionPre = auth();
+  const workoutData = await fetchUserByWorkout(params.workoutId);
 
-  const workoutDataPre = fetchUserByWorkout(params.workoutId);
-  const [session, workoutData] = await Promise.all([
-    sessionPre,
-    workoutDataPre,
-  ]);
   const userData = await fetchUserData(workoutData.createdBy);
-  const { image, email, name } = SessionUserSchema.parse(session?.user);
-  const idSession = await fetchIdFromSession(name);
+  const idSession = await getIdFromSession();
 
   const owner = isOwner(idSession, workoutData.createdBy);
 
@@ -87,7 +75,7 @@ export default async function ({ params }: { params: { workoutId: string } }) {
           kg
         </p>
         <div>
-          {session == null && (
+          {idSession == null && (
             <Card className="mb-8">
               <CardHeader>
                 <CardTitle>New to Apollo?</CardTitle>
@@ -102,7 +90,7 @@ export default async function ({ params }: { params: { workoutId: string } }) {
           )}
         </div>
         <div>
-          {session != null && owner && (
+          {idSession != null && owner && (
             <Card className="mb-8 mx-2">
               <div className="flex flex-row items-center">
                 <CardHeader>

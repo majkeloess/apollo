@@ -24,12 +24,12 @@ export default function LikeButton({
         <div className="flex flex-row items-center">
           <p
             className={`text-xl font-medium ${
-              !liked ? "text-[#808080]" : "text-[#FFD700]"
+              !liked ? "text-[#A9A9A9]" : "text-[#FFD700]"
             }`}
           >
             {likesData.length}
           </p>
-          <IconBolt color={!liked ? "#808080" : "#FFD700"} />
+          <IconBolt color={!liked ? "#A9A9A9" : "#FFD700"} />
         </div>
       </Button>
     </form>

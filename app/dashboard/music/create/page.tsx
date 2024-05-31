@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MotionDiv } from "@/components/ui/MotionDiv";
@@ -13,17 +7,13 @@ import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { createPlaylist } from "@/lib/actions";
 import { Metadata } from "next";
-import { auth } from "@/auth";
-import { SessionUserSchema } from "@/definitions";
-import { fetchIdFromSession } from "@/lib/fetch";
+import { getIdFromSession } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Music Create",
 };
 
 export default async function CreateMusic() {
-  const session = await auth();
-  const { image, email, name } = SessionUserSchema.parse(session?.user);
-  const id = await fetchIdFromSession(name);
+  const id = await getIdFromSession();
 
   const bindedPlaylist = createPlaylist.bind(null, id);
 

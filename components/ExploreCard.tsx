@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import prisma from "@/lib/prisma";
+import { Card, CardContent } from "./ui/card";
+import { followAction } from "@/lib/actions";
 export default async function ExploreCard({
   name,
   id,
   image,
+  idSession,
 }: {
   name: string;
   id: string;
   image: string | null;
+  idSession: string;
 }) {
   return (
     <Card className="hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50">
@@ -26,7 +28,16 @@ export default async function ExploreCard({
               alt="profile-image"
             />
           </Link>
-          <Button variant="default">Follow</Button>
+          <form
+            action={async () => {
+              "use server";
+              await followAction(idSession, id);
+            }}
+          >
+            <Button className="font-bold w-full" variant="outline">
+              Follow
+            </Button>
+          </form>
         </div>
       </CardContent>
     </Card>

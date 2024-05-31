@@ -203,3 +203,45 @@ export async function fetchFollowing(id: string) {
   const validatedFollowData = FollowDataSchema.parse(followData);
   return validatedFollowData;
 }
+
+//more complex fetches
+
+export async function fetchUsersNotFollowed(id: string) {
+  const followingIds = await prisma.follow
+    .findMany({
+      where: { followerId: id },
+      select: { followingId: true },
+    })
+    .then((follows) => follows.map((follow) => follow.followingId));
+
+  return await prisma.user.findMany({
+    where: {
+      NOT: {
+        id: { in: followingIds },
+      },
+      AND: {
+        id: { not: id }, //you
+      },
+    },
+  });
+}
+
+export async function fetchFollowedWorkouts(id: string) {
+  const followingIds = await prisma.follow
+    .findMany({
+      where: { followerId: id },
+      select: { followingId: true },
+    })
+    .then((follows) => follows.map((follow) => follow.followingId));
+
+  followingIds.push(id);
+
+  return await prisma.workout.findMany({
+    where: {
+      createdBy: { in: followingIds },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}

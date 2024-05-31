@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 
 export async function deleteData() {
   unstable_noStore();
-  await prisma.workoutDetails.deleteMany();
-  await prisma.workout.deleteMany();
-  await prisma.exercises.deleteMany();
+  //await prisma.workoutDetails.deleteMany();
+  //await prisma.workout.deleteMany();
+  //await prisma.exercises.deleteMany();
   //await prisma.music.deleteMany();
   //await prisma.articles.deleteMany();
 }

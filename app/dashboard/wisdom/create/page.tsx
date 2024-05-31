@@ -14,18 +14,14 @@ import Link from "next/link";
 import { IconArrowBack } from "@tabler/icons-react";
 import { Metadata } from "next";
 import { createArticle } from "@/lib/actions";
-import { SessionUserSchema } from "@/definitions";
-import { auth } from "@/auth";
-import { fetchIdFromSession } from "@/lib/fetch";
+import { getIdFromSession } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Wisdom Create",
 };
 
 export default async function CreateWisdom() {
-  const session = await auth();
-  const { image, email, name } = SessionUserSchema.parse(session?.user);
-  const id = await fetchIdFromSession(name);
+  const id = await getIdFromSession();
 
   const bindedArticle = createArticle.bind(null, id);
   return (

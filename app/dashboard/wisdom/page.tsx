@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { IconPlus } from "@tabler/icons-react";
 import { MotionDiv } from "@/components/ui/MotionDiv";
 import { Metadata } from "next";
 import { Suspense } from "react";

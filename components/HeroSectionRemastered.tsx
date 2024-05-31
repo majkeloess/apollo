@@ -5,7 +5,7 @@ import { MotionDiv } from "./ui/MotionDiv";
 
 export default function HeroSectionRemastered() {
   return (
-    <div className="xl:my-40 my-20 flex flex-row">
+    <div className="xl:my-40 my-28 flex flex-row">
       <div className="flex items-center flex-col xl:flex-row justify-center gap-12  xl:gap-16 w-full">
         <div className="flex flex-col xl:gap-10">
           <AboutHighlightComponent2 />

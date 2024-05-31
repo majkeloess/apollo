@@ -9,6 +9,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function cx(...args: ClassValue[]) {
+  return twMerge(clsx(...args));
+}
+
 export function ObjectSets(reps: number[], weights: number[], sets: number) {
   const objectSets = [];
 

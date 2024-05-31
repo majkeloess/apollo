@@ -23,6 +23,9 @@ export default async function HomePage() {
       <div className="absolute bottom-0 right-0 m-40 hidden xl:block">
         <Footer />
       </div>
+      <div className="absolute bottom-0 xl:hidden w-full my-10">
+        <Footer />
+      </div>
     </div>
   );
 }

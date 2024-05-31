@@ -13,7 +13,7 @@ import {
   ArticleFormSchema,
   CommentDataSchema,
 } from "@/definitions";
-import { isFollowing } from "./utils";
+import { isFollowing, isLiked } from "./utils";
 
 export async function createWorkout(note: string, id: string) {
   try {
@@ -196,34 +196,37 @@ export async function createComment(
   } finally {
     await prisma.$disconnect();
   }
+
   revalidatePath("/dashboard");
 }
 
 export async function likeAction(workoutId: string, id: string) {
-  unstable_noStore();
+  const likeData = await isLiked(workoutId, id);
+
   try {
-    await prisma.like.create({
-      data: {
-        createdBy: id,
-        workoutId: workoutId,
-      },
-    });
+    if (likeData) {
+      const deleteLike = await prisma.like.delete({
+        where: {
+          likeId: likeData.likeId,
+        },
+      });
+    } else {
+      const like = await prisma.like.create({
+        data: {
+          createdBy: id,
+          workoutId: workoutId,
+        },
+      });
+    }
   } catch (error) {
-    throw new Error("Problem with like!");
-  } finally {
-    await prisma.$disconnect();
+    throw new Error("Problems with likeAction!");
   }
 
   revalidatePath("/dashboard");
 }
 
 export async function followAction(followerId: string, followingId: string) {
-  const followData = await prisma.follow.findFirst({
-    where: {
-      followerId: followerId,
-      followingId: followingId,
-    },
-  });
+  const followData = await isFollowing(followerId, followingId);
   try {
     if (followData) {
       const deleteFollow = await prisma.follow.delete({

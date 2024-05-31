@@ -31,13 +31,6 @@ function getWeekDates(date = new Date()) {
   return [startOfWeek, endOfWeek];
 }
 
-export function filterDatesByCurrentWeek(dates: Date[]) {
-  const [startOfWeek, endOfWeek] = getWeekDates();
-  return dates.filter((date) => {
-    return date >= startOfWeek && date <= endOfWeek;
-  });
-}
-
 export function isOwner(idFromSession: string, idOfCurrentPage: string) {
   return idFromSession == idOfCurrentPage;
 }
@@ -50,4 +43,14 @@ export async function isFollowing(followerId: string, followingId: string) {
     },
   });
   return isExistingFollow;
+}
+
+export async function isLiked(workoutId: string, id: string) {
+  const isExistingLike = await prisma.like.findFirst({
+    where: {
+      workoutId: workoutId,
+      createdBy: id,
+    },
+  });
+  return isExistingLike;
 }

@@ -237,8 +237,8 @@ export async function followAction(followerId: string, followingId: string) {
     } else {
       const newFollow = await prisma.follow.create({
         data: {
-          followerId: followerId, // ID zalogowanego użytkownika
-          followingId: followingId, // ID użytkownika, który ma być obserwowany
+          followerId: followerId, //logged one
+          followingId: followingId, // to follow one
         },
       });
     }

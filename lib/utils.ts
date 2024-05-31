@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import prisma from "./prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -39,4 +40,14 @@ export function filterDatesByCurrentWeek(dates: Date[]) {
 
 export function isOwner(idFromSession: string, idOfCurrentPage: string) {
   return idFromSession == idOfCurrentPage;
+}
+
+export async function isFollowing(followerId: string, followingId: string) {
+  const isExistingFollow = await prisma.follow.findFirst({
+    where: {
+      followerId: followerId,
+      followingId: followingId,
+    },
+  });
+  return isExistingFollow;
 }

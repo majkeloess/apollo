@@ -13,6 +13,7 @@ import {
   ArticleFormSchema,
   CommentDataSchema,
 } from "@/definitions";
+import { isFollowing } from "./utils";
 
 export async function createWorkout(note: string, id: string) {
   try {
@@ -195,9 +196,10 @@ export async function createComment(
   } finally {
     await prisma.$disconnect();
   }
+  revalidatePath("/dashboard");
 }
 
-export async function createLike(workoutId: string, id: string) {
+export async function likeAction(workoutId: string, id: string) {
   unstable_noStore();
   try {
     await prisma.like.create({
@@ -211,20 +213,34 @@ export async function createLike(workoutId: string, id: string) {
   } finally {
     await prisma.$disconnect();
   }
+
+  revalidatePath("/dashboard");
 }
 
 export async function followAction(followerId: string, followingId: string) {
-  // const newFollow = await prisma.follow.create({
-  //   data: {
-  //     followerId: "10", // ID zalogowanego użytkownika
-  //     followingId: "3", // ID użytkownika, który ma być obserwowany
-  //   },
-  // });\
-
-  const isExistingFollow = await prisma.follow.findFirst({
+  const followData = await prisma.follow.findFirst({
     where: {
       followerId: followerId,
       followingId: followingId,
     },
   });
+  try {
+    if (followData) {
+      const deleteFollow = await prisma.follow.delete({
+        where: {
+          followId: followData.followId,
+        },
+      });
+    } else {
+      const newFollow = await prisma.follow.create({
+        data: {
+          followerId: followerId, // ID zalogowanego użytkownika
+          followingId: followingId, // ID użytkownika, który ma być obserwowany
+        },
+      });
+    }
+  } catch (error) {
+    throw new Error("Problems with followAction!");
+  }
+  revalidatePath(`/dashboard/profile/${followingId}`);
 }

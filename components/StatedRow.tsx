@@ -1,12 +1,11 @@
-"use client";
-import { useState } from "react";
-import { Table, TableBody, TableRow, TableCell } from "./ui/table";
+import { TableRow, TableCell } from "./ui/table";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { IconEraser, IconLink } from "@tabler/icons-react";
 import { Articles, Music, Workout } from "@prisma/client";
+import { deleteArticle, deleteMusic } from "@/lib/delete";
 
-export function StatedArticleRow({
+export async function StatedArticleRow({
   index,
   data,
   owner,
@@ -15,41 +14,38 @@ export function StatedArticleRow({
   data: Articles;
   owner: boolean;
 }) {
-  const [showRow, setShowRow] = useState<boolean>(true);
   return (
     <>
-      {showRow && (
-        <TableRow key={index}>
-          <TableCell className="font-medium">
-            <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-              {data.articlesName}
-            </span>
-          </TableCell>
-          <TableCell className="flex justify-end">
-            <Link href={data.articlesLink} target="_blank">
-              <Button variant="ghost" size="icon">
-                <IconLink size={24} />
-              </Button>
-            </Link>
-            {owner && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  setShowRow(!showRow);
-                }}
-              >
-                <IconEraser size={24} />
-              </Button>
-            )}
-          </TableCell>
-        </TableRow>
-      )}
+      <TableRow key={index}>
+        <TableCell className="font-medium">
+          <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+            {data.articlesName}
+          </span>
+        </TableCell>
+        <TableCell className="flex justify-end">
+          <Link href={data.articlesLink} target="_blank">
+            <Button variant="ghost" size="icon">
+              <IconLink size={24} />
+            </Button>
+          </Link>
+          {owner && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={async () => {
+                await deleteArticle(data.articleId, data.createdBy);
+              }}
+            >
+              <IconEraser size={24} />
+            </Button>
+          )}
+        </TableCell>
+      </TableRow>
     </>
   );
 }
 
-export function StatedMusicRow({
+export async function StatedMusicRow({
   index,
   data,
   owner,
@@ -58,37 +54,34 @@ export function StatedMusicRow({
   data: Music;
   owner: boolean;
 }) {
-  const [showRow, setShowRow] = useState<boolean>(true);
   return (
     <>
-      {showRow && (
-        <TableRow key={index}>
-          <TableCell className="font-bold">
-            <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-              {data.musicName}
-            </span>
-          </TableCell>
-          <TableCell>{data.genre}</TableCell>
-          <TableCell className="flex justify-end">
-            <Link href={data.musicLink} target="_blank">
-              <Button variant="ghost" size="icon">
-                <IconLink size={24} />
-              </Button>
-            </Link>
-            {owner && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  setShowRow(!showRow);
-                }}
-              >
-                <IconEraser size={24} />
-              </Button>
-            )}
-          </TableCell>
-        </TableRow>
-      )}
+      <TableRow key={index}>
+        <TableCell className="font-bold">
+          <span className="bg-gradient-to-tl from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+            {data.musicName}
+          </span>
+        </TableCell>
+        <TableCell>{data.genre}</TableCell>
+        <TableCell className="flex justify-end">
+          <Link href={data.musicLink} target="_blank">
+            <Button variant="ghost" size="icon">
+              <IconLink size={24} />
+            </Button>
+          </Link>
+          {owner && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={async () => {
+                await deleteMusic(data.musicId, data.createdBy);
+              }}
+            >
+              <IconEraser size={24} />
+            </Button>
+          )}
+        </TableCell>
+      </TableRow>
     </>
   );
 }

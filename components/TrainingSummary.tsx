@@ -1,5 +1,3 @@
-import { group } from "console";
-
 export default function TrainingSummary({
   groups,
   totalLoad,

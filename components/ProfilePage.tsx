@@ -14,7 +14,7 @@ import CalendarCard from "./CalendarCard";
 import FollowButton from "./FollowButton";
 import { auth } from "@/auth";
 import { SessionUserSchema } from "@/definitions";
-import { isOwner } from "@/lib/utils";
+import { isFollowing, isOwner } from "@/lib/utils";
 
 export default async function ProfilePage({ id }: { id: string }) {
   const session = await auth();
@@ -23,6 +23,7 @@ export default async function ProfilePage({ id }: { id: string }) {
 
   //check whether it's owner
   const owner = isOwner(idSession, id);
+  const follow = await isFollowing(idSession, id);
 
   const followersDataPre = fetchFollowers(id);
   const followingDataPre = fetchFollowing(id);
@@ -71,7 +72,9 @@ export default async function ProfilePage({ id }: { id: string }) {
               </p>
               <p>{profileData.createdAt.toDateString()}</p>
             </div>
-            {!owner && <FollowButton />}
+            {!owner && (
+              <FollowButton follow={follow} idSession={idSession} id={id} />
+            )}
           </div>
         </div>
         <div className="flex flex-row gap-10 justify-center mt-8">

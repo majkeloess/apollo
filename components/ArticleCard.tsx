@@ -37,7 +37,7 @@ export default async function ArticlesCard({
               <Image
                 width={25}
                 height={25}
-                src={userData.image}
+                src={userData.image ? userData.image : "/A_logo.png"}
                 className="rounded-full"
                 alt="badge"
               />

@@ -1,5 +1,6 @@
-import { unstable_noStore } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import prisma from "./prisma";
+import { redirect } from "next/navigation";
 
 export async function deleteData() {
   unstable_noStore();
@@ -10,22 +11,25 @@ export async function deleteData() {
   //await prisma.articles.deleteMany();
 }
 
-export async function deleteMusic(musicId: string) {
+export async function deleteMusic(musicId: string, id: string) {
   unstable_noStore();
   await prisma.music.delete({
     where: {
       musicId: musicId,
     },
   });
+
+  revalidatePath(`/dashboard/profile/${id}`);
 }
 
-export async function deleteArticle(articleId: string) {
+export async function deleteArticle(articleId: string, id: string) {
   unstable_noStore();
   await prisma.articles.delete({
     where: {
       articleId: articleId,
     },
   });
+  revalidatePath(`/dashboard/profile/${id}`);
 }
 
 export async function deleteWorkout(workoutId: string) {
@@ -35,6 +39,9 @@ export async function deleteWorkout(workoutId: string) {
       workoutId: workoutId,
     },
   });
+
+  revalidatePath("/dashboard/strength");
+  redirect("/dashboard");
 }
 
 export async function deleteLike(workoutId: string, id: string) {

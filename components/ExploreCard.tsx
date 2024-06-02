@@ -17,17 +17,21 @@ export default async function ExploreCard({
   return (
     <Card className=" hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950  ">
       <CardContent className="flex flex-col justify-center items-center gap-4 mt-6">
-        <p className="font-bold text-xl text-center">{name}</p>
+        <Link href={`/dashboard/profile/${id}`}>
+          <p className="font-bold text-xl text-center">{name}</p>
+        </Link>
         <div className="flex flex-row justify-center items-center gap-4">
-          <Link href={`/dashboard/profile/${id}`} target="_blank">
-            <Image
-              src={image ? image : "/A_logo.png"}
-              width={50}
-              height={50}
-              className="rounded-full "
-              alt="profile-image"
-            />
-          </Link>
+          <div className=" lg:block hidden">
+            <Link href={`/dashboard/profile/${id}`}>
+              <Image
+                src={image ? image : "/A_logo.png"}
+                width={50}
+                height={50}
+                className="rounded-full"
+                alt="profile-image"
+              />
+            </Link>
+          </div>
           <form
             action={async () => {
               "use server";

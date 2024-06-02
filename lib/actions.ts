@@ -183,21 +183,23 @@ export async function createComment(
     commentContent: formData.get("comment"),
   });
 
-  try {
-    await prisma.comment.create({
-      data: {
-        workoutId: workoutId,
-        createdBy: createdBy,
-        commentContent: commentContent,
-      },
-    });
-  } catch (error) {
-    throw new Error("Error with creating comment!");
-  } finally {
-    await prisma.$disconnect();
-  }
+  if (commentContent != "") {
+    try {
+      await prisma.comment.create({
+        data: {
+          workoutId: workoutId,
+          createdBy: createdBy,
+          commentContent: commentContent,
+        },
+      });
+    } catch (error) {
+      throw new Error("Error with creating comment!");
+    } finally {
+      await prisma.$disconnect();
+    }
 
-  revalidatePath("/dashboard");
+    revalidatePath("/dashboard");
+  }
 }
 
 export async function likeAction(workoutId: string, id: string) {

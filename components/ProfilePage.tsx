@@ -102,7 +102,9 @@ export default async function ProfilePage({ id }: { id: string }) {
         {/* <div className="h-0.5 my-2 dark:bg-gray-800 bg-gray-200"></div> */}
         <div className="mt-10 mx-8 flex flex-col justify-center gap-10 mb-28">
           <CalendarCard name={profileData.name} workouts={workoutsData} />
-          <ChartCard name={profileData.name} workouts={workoutsData} />
+          {workoutsData.length != 0 && (
+            <ChartCard name={profileData.name} workouts={workoutsData} />
+          )}
           {workoutsData.length != 0 && (
             <ProfileCard
               name={profileData.name}

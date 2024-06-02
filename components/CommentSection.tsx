@@ -1,3 +1,4 @@
+"use client";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Input } from "./ui/input";
 import { TableBody, Table, TableRow, TableCell } from "./ui/table";
@@ -5,6 +6,7 @@ import { Commented } from "./Toast";
 import { createComment } from "@/lib/actions";
 import { Comment } from "@prisma/client";
 import Link from "next/link";
+import { useRef } from "react";
 export function CommentSection({
   show,
   id,
@@ -21,6 +23,7 @@ export function CommentSection({
     workoutId: workoutId,
   };
   const bindedComment = createComment.bind(null, data);
+  const ref = useRef<HTMLFormElement>(null);
 
   return (
     <div className="w-full my-2">
@@ -49,7 +52,13 @@ export function CommentSection({
               ))}
             </TableBody>
           </Table>
-          <form action={bindedComment}>
+          <form
+            ref={ref}
+            action={async (formData) => {
+              await bindedComment(formData);
+              ref.current?.reset();
+            }}
+          >
             <div className="w-full flex flex-row items-center gap-6">
               <Input
                 placeholder="Add comment ..."

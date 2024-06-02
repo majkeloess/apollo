@@ -5,7 +5,7 @@ import { IconEraser, IconLink } from "@tabler/icons-react";
 import { Articles, Music, Workout } from "@prisma/client";
 import { deleteArticle, deleteMusic } from "@/lib/delete";
 
-export async function StatedArticleRow({
+export function StatedArticleRow({
   index,
   data,
   owner,
@@ -29,15 +29,16 @@ export async function StatedArticleRow({
             </Button>
           </Link>
           {owner && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={async () => {
+            <form
+              action={async () => {
+                "use server";
                 await deleteArticle(data.articleId, data.createdBy);
               }}
             >
-              <IconEraser size={24} />
-            </Button>
+              <Button variant="ghost" size="icon">
+                <IconEraser size={24} />
+              </Button>
+            </form>
           )}
         </TableCell>
       </TableRow>
@@ -70,15 +71,16 @@ export async function StatedMusicRow({
             </Button>
           </Link>
           {owner && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={async () => {
+            <form
+              action={async () => {
+                "use server";
                 await deleteMusic(data.musicId, data.createdBy);
               }}
             >
-              <IconEraser size={24} />
-            </Button>
+              <Button variant="ghost" size="icon">
+                <IconEraser size={24} />
+              </Button>
+            </form>
           )}
         </TableCell>
       </TableRow>

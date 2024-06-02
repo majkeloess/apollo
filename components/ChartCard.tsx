@@ -46,6 +46,15 @@ export default function ChartCard({
       },
       y: {
         beginAtZero: true,
+        title: {
+          display: true,
+          text: "kg", // Dodajemy jednostkę kg do osi Y
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false, // Usuwamy legendę
       },
     },
   };

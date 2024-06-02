@@ -9,6 +9,7 @@ export async function deleteData() {
   //await prisma.exercises.deleteMany();
   //await prisma.music.deleteMany();
   //await prisma.articles.deleteMany();
+  await prisma.comment.deleteMany();
 }
 
 export async function deleteMusic(musicId: string, id: string) {

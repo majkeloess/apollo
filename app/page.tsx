@@ -9,14 +9,14 @@ export default async function HomePage() {
       <NavbarAbout />
       <HeroSectionRemastered />
       <InfiniteMoving />
-      <div className="flex w-full items-center justify-center">
+      {/* <div className="flex w-full items-center justify-center">
         <p className="text-4xl xl:text-6xl font-bold m-10 ">
           June{" "}
           <span className="bg-gradient-to-tl from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent">
             2024
           </span>
         </p>
-      </div>
+      </div> */}
       <div className="flex flex-row justify-center">
         <Image src="/her.png" width={464} height={538} alt="her" />
       </div>

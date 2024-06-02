@@ -13,6 +13,7 @@ import WorkoutTable from "./WorkoutTable";
 import Link from "next/link";
 import FooterCardSection from "./FooterCardSection";
 import { isLiked } from "@/lib/utils";
+import { deleteData } from "@/lib/delete";
 export default async function FeedCard({
   workoutId,
   workoutNote,
@@ -29,7 +30,6 @@ export default async function FeedCard({
   id: string;
 }) {
   const liked = await isLiked(workoutId, id);
-
   const userData = await fetchUserData(createdBy);
   const commentData = await fetchComments(workoutId);
   const likesData = await fetchLikes(workoutId);

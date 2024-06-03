@@ -18,6 +18,7 @@ The development of the project began on *9 April 2024*.
 - zod
 # 🛠️ Features 
 ![Apollo_feature](https://github.com/majkeloess/ApolloApp/assets/118011581/9695addd-d25e-431a-88ec-d439fd3480cb)
+
 🔋 **Authentication:** Securely authenticate users through Google OAuth.
 
 🔋 **Authorization**:  Implement role-based access control to manage user permissions.

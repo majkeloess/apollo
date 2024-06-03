@@ -3,7 +3,7 @@ import { ObjectSets } from "@/lib/utils";
 import { Table, TableBody, TableRow, TableCell } from "./ui/table";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { IconAlignRight, IconArrowLeft, IconDots } from "@tabler/icons-react";
+import { IconArrowLeft, IconDots } from "@tabler/icons-react";
 
 export default function WorkoutSetsTable({
   sets,
@@ -18,12 +18,8 @@ export default function WorkoutSetsTable({
   const tableRows = ObjectSets(reps, weights, sets);
 
   return hidden ? (
-    <Button
-      variant="list"
-      className="pl-8 pr-0"
-      onClick={() => setHidden(false)}
-    >
-      <IconAlignRight />
+    <Button variant="list" className="" onClick={() => setHidden(false)}>
+      <IconDots />
     </Button>
   ) : (
     <Table className="flex flex-col items-center">

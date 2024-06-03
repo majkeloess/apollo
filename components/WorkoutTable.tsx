@@ -26,7 +26,7 @@ export default async function WorkoutTable({
                   </span>
                 </TableCell>
                 <TableCell>{exerciseInfo.muscleGroup}</TableCell>
-                <TableCell className="flex justify-end w-full">
+                <TableCell className="flex justify-end items-center w-full">
                   <WorkoutSetsTable
                     sets={details.sets}
                     reps={details.repetitions}

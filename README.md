@@ -4,6 +4,8 @@
 **Apollo** is the largest project I'm currently working on. The idea behind Apollo is simple: it's a platform where you can connect with your friends and view their daily gym or endurance training activities on your feed. 
 
 Current version: *1.0*
+
+The development of the project began on *9 April 2024*.
 # ⚙️ Tech stack
 - Next.js
 - React.js
